@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nameInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    app:boxBackgroundMode="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/toy_brick"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:id="@+id/editText_material"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="0.6"
+            android:textColor="#505050"
+            android:textSize="25sp"
+            android:hint="@string/hint_material"
+            android:autofillHints="@string/hint_material" />
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/puzzle"
+            android:layout_gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/editText_parts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textColor="#505050"
+            android:textSize="25sp"
+            android:inputType="numberDecimal"
+            android:hint="@string/hint_subsShare"
+            android:autofillHints="@string/hint_subsShare" />
+    </LinearLayout>
+</com.google.android.material.textfield.TextInputLayout>
