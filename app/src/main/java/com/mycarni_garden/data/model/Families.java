@@ -18,6 +18,11 @@ public class Families {
 
     //=============================================
 
+    public Families (String name, String eng_name){
+        this.name = name;
+        this.eng_name = eng_name;
+    }
+
     public int getId() {
         return id;
     }

@@ -13,7 +13,7 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
-        android:contentDescription="Upload an image"
+        android:contentDescription="@string/upload_an_image"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/nameInputLayout"
@@ -23,44 +23,48 @@
 
     <EditText
         android:id="@+id/editText_speciesName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="text"
         android:hint="@string/hint_speciesName"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/uploadImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText_family"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:ems="10"
         android:hint="@string/hint_family"
         android:inputType="text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/uploadImage"
         app:layout_constraintTop_toBottomOf="@+id/editText_speciesName" />
 
     <EditText
         android:id="@+id/editText_maxHeight"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:ems="10"
         android:inputType="number"
         android:hint="@string/hint_height"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/uploadImage"
         app:layout_constraintTop_toBottomOf="@+id/editText_family" />
 
     <EditText
         android:id="@+id/editText_lifeSpan"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:ems="10"
         android:hint="@string/hint_lifeSpan"
         android:inputType="text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/uploadImage"
         app:layout_constraintTop_toBottomOf="@+id/editText_maxHeight" />
@@ -83,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_desc"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:textSize="20sp" />
         </ScrollView>
     </com.google.android.material.textfield.TextInputLayout>
 

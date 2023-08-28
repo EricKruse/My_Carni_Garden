@@ -18,9 +18,15 @@ public class SubstrateComponent {
     private int material_id;
 
     @ColumnInfo(name = "parts")
-    private float parts;
+    private double parts;
 
     //====================================
+
+
+    public SubstrateComponent(int material_id, double parts) {
+        this.material_id = material_id;
+        this.parts = parts;
+    }
 
     public int getId() {
         return id;
@@ -38,7 +44,7 @@ public class SubstrateComponent {
         this.material_id = material_id;
     }
 
-    public float getParts() { return parts; }
+    public double getParts() { return parts; }
 
-    public void setParts(float parts) { this.parts = parts; }
+    public void setParts(double parts) { this.parts = parts; }
 }

@@ -15,6 +15,10 @@ public class Lighting {
 
     //===================================
 
+    public Lighting(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
