@@ -30,4 +30,8 @@
     <string name="submit_substrate">Submit substrate</string>
     <string name="cancel_substrate">Cancel substrate</string>
     <string name="add_substrate">Add substrate</string>
+    <string name="add_lighting">Add Lighting</string>
+    <string name="upload_an_image">Upload an image</string>
+    <string name="lighting">Lighting</string>
+    <string name="winter">Winter:</string>
 </resources>

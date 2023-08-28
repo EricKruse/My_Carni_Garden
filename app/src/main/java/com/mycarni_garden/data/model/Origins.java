@@ -22,10 +22,17 @@ public class Origins {
     @ColumnInfo(name = "isHighland")
     private boolean isHighland;
 
-    @Ignore
-    private List<Lighting> lightings;
+    @ColumnInfo(name = "winterStrength")
+    private int winterStrength;
 
     //===========================================
+
+    public Origins (String continent, String area, boolean isHighland, int winterStrength){
+        this.continent = continent;
+        this.area = area;
+        this.isHighland = isHighland;
+        this.winterStrength = winterStrength;
+    }
 
     public int getId() {
         return id;

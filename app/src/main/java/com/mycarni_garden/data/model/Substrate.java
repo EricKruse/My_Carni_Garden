@@ -23,15 +23,11 @@ public class Substrate {
 
     //=================================================
 
-    public Substrate(int id, String name) {
-        this.id = id;
+    public Substrate(String name, int wateringInDays) {
         this.name = name;
+        this.wateringInDays = wateringInDays;
     }
 
-    public Substrate(int id, String name, List<SubstrateComponent> components) {
-        this.id = id;
-        this.name = name;
-    }
 
     //=================================================
 

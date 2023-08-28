@@ -15,6 +15,11 @@ public class Material {
 
     //========================================
 
+
+    public Material(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
