@@ -8,18 +8,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mycarni_garden.data.database.LightingDAO;
 import com.mycarni_garden.data.model.Lighting;
 import com.mycarni_garden.ui.models.column_create_ingredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class RV_Adapter_lighting extends RecyclerView.Adapter<RV_Adapter_lighting.ViewHolder> {
 
     private RecyclerView rv_lighting;
-    private List<Lighting> lightings;
-    View view;
+    private ArrayList<Lighting> lightings;
+    private View view;
+    private LightingDAO lightingDAO;
 
-    public RV_Adapter_lighting(RecyclerView rv_lighting, List<Lighting> lightings) {
+    public RV_Adapter_lighting(RecyclerView rv_lighting, ArrayList<Lighting> lightings) {
         this.lightings = lightings;
         this.rv_lighting = rv_lighting;
         ViewGroup parent = (ViewGroup) rv_lighting.getParent();
