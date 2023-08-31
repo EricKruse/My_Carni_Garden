@@ -1,6 +1,7 @@
 package com.mycarni_garden.data.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -13,11 +14,14 @@ import com.mycarni_garden.data.model.Families;
 import com.mycarni_garden.data.model.Lighting;
 import com.mycarni_garden.data.model.LightingOriginCrossRef;
 import com.mycarni_garden.data.model.Material;
+import com.mycarni_garden.data.model.OriginWithLighting;
 import com.mycarni_garden.data.model.Origins;
 import com.mycarni_garden.data.model.Species;
+import com.mycarni_garden.data.model.SpeciesWithSubstrates;
 import com.mycarni_garden.data.model.Substrate;
 import com.mycarni_garden.data.model.SubstrateComponent;
 import com.mycarni_garden.data.model.SubstrateSpeciesCrossRef;
+import com.mycarni_garden.data.model.SubstrateWithComponents;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,10 @@ import java.util.concurrent.Executors;
             Species.class,
             Substrate.class,
             SubstrateComponent.class,
-            Lighting.class
+            Lighting.class,
+            ComponentSubstrateCrossRef.class,
+            LightingOriginCrossRef.class,
+            SubstrateSpeciesCrossRef.class
         },
         version = 1,
         exportSchema = false)
@@ -52,27 +59,31 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
     public static AppDatabase getInstance(Context context) {
+        Log.d("AppDatabase", "Getting database instance...");
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class,
-                            "myCarniGarden.db")
-                            .addCallback(new Callback() {
-                                @Override
-                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                    super.onCreate(db);
-
-                                    Executors.newSingleThreadExecutor().execute(() -> {
-                                        INSTANCE.populateInitialData();
-
-                                    });
-                                }
-                            })
-                            .build();
+                    try {
+                        INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                        AppDatabase.class,
+                                        "myCarniGarden.db")
+                                .addCallback(new Callback() {
+                                    @Override
+                                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                        super.onCreate(db);
+                                        Executors.newSingleThreadExecutor().execute(() -> {
+                                            INSTANCE.populateInitialData();
+                                        });
+                                    }
+                                })
+                                .build();
+                    } catch (Exception e) {
+                        Log.e("AppDatabase", "Error creating database: " + e.getMessage());
+                    }
                 }
             }
         }
+        Log.d("AppDatabase", "Returning database");
         return INSTANCE;
     }
 
