@@ -66,6 +66,10 @@ public class Origins {
         isHighland = mode;
     }
 
+    public int getWinterStrength() { return winterStrength; }
+
+    public void setWinterStrength(int winterStrength) { this.winterStrength = winterStrength; }
+
     //===========================================
 
     @Override

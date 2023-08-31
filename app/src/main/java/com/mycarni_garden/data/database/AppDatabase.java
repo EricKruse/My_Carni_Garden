@@ -1,6 +1,7 @@
 package com.mycarni_garden.data.database;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -58,34 +59,34 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
 
-    public static AppDatabase getInstance(Context context) {
+    public static synchronized AppDatabase getInstance(Context context) {
         Log.d("AppDatabase", "Getting database instance...");
         if (INSTANCE == null) {
-            synchronized (AppDatabase.class) {
-                if (INSTANCE == null) {
-                    try {
-                        INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                        AppDatabase.class,
-                                        "myCarniGarden.db")
-                                .addCallback(new Callback() {
-                                    @Override
-                                    public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                        super.onCreate(db);
-                                        Executors.newSingleThreadExecutor().execute(() -> {
-                                            INSTANCE.populateInitialData();
-                                        });
-                                    }
-                                })
-                                .build();
-                    } catch (Exception e) {
-                        Log.e("AppDatabase", "Error creating database: " + e.getMessage());
-                    }
-                }
+            try {
+                Log.d("AppDatabase", "Attempting to create database...");
+                INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                AppDatabase.class,
+                                "myCarniGarden.db")
+                        .fallbackToDestructiveMigration()
+                        .addCallback(roomCallback)
+                        .build();
+            } catch (Exception e) {
+                Log.e("AppDatabase", "Error creating database: " + e.getMessage());
             }
         }
         Log.d("AppDatabase", "Returning database");
         return INSTANCE;
     }
+
+    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            Executors.newSingleThreadExecutor().execute(() -> {
+                INSTANCE.populateInitialData();
+            });
+        }
+    };
 
     private void populateInitialData() {
         FamiliesDAO familiesDAO = familiesDao();
