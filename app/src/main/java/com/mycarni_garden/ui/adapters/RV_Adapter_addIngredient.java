@@ -35,6 +35,7 @@ public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_ad
         }
     }
 
+    // Watch text of latest column, add new column when filled
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,6 +50,7 @@ public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_ad
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
 
+            // Recursively add a column if under 6 in total (Usually >= 3 components)
             @Override
             public void afterTextChanged(Editable s) {
                 int position = Ingredients.lastIndexOf(column);

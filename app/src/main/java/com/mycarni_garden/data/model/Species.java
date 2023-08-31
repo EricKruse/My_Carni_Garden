@@ -4,12 +4,18 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import java.util.List;
 
 @Entity(tableName = "species",
+        indices = {
+                @Index("family_id"),
+                @Index("origin_id")
+        },
         foreignKeys = {
-                @ForeignKey(entity = Families.class, parentColumns = "id", childColumns = "family_Id")
+                @ForeignKey(entity = Families.class, parentColumns = "id", childColumns = "family_Id"),
+                @ForeignKey(entity = Origins.class, parentColumns = "id", childColumns = "origin_Id")
         })
 public class Species {
     @PrimaryKey(autoGenerate = true)
