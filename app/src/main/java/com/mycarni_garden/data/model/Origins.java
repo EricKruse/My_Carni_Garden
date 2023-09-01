@@ -10,8 +10,8 @@ import java.util.List;
 @Entity(tableName = "origins")
 public class Origins {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+    @ColumnInfo(name = "origin_id")
+    private int origin_id;
 
     @ColumnInfo(name = "area")
     private String area;
@@ -34,12 +34,12 @@ public class Origins {
         this.winterStrength = winterStrength;
     }
 
-    public int getId() {
-        return id;
+    public int getOrigin_id() {
+        return origin_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrigin_id(int id) {
+        this.origin_id = id;
     }
 
     public String getArea() {

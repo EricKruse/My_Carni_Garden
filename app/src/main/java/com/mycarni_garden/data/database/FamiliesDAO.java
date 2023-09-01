@@ -28,7 +28,7 @@ public interface FamiliesDAO {
     @Query("SELECT * FROM families")
     List<Families> getAllFamilies();
 
-    @Query("SELECT * FROM families WHERE id = :family_id")
+    @Query("SELECT * FROM families WHERE family_id = :family_id")
     List<Families> getFamilyById(int family_id);
 }
 

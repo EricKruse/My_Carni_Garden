@@ -10,17 +10,16 @@ import java.util.List;
 
 @Entity(tableName = "species",
         indices = {
-                @Index("family_id"),
-                @Index("origin_id")
+                @Index("species_id")
         },
         foreignKeys = {
-                @ForeignKey(entity = Families.class, parentColumns = "id", childColumns = "family_Id"),
-                @ForeignKey(entity = Origins.class, parentColumns = "id", childColumns = "origin_Id")
+                @ForeignKey(entity = Families.class, parentColumns = "family_id", childColumns = "family_id"),
+                @ForeignKey(entity = Origins.class, parentColumns = "origin_id", childColumns = "origin_id")
         })
 public class Species {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+    @ColumnInfo(name = "species_id")
+    private int species_id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -34,22 +33,19 @@ public class Species {
     @ColumnInfo(name = "lifeSpan")
     private Double lifeSpan;
 
-    @Ignore
-    private List<Substrate> substrate_ids;
+    @ColumnInfo(name = "origin_id")
+    private int origin_id;
 
-    @ColumnInfo(name = "origin_Id")
-    private int origin_Id;
-
-    @ColumnInfo(name = "family_Id")
-    private int family_Id;
+    @ColumnInfo(name = "family_id")
+    private int family_id;
 
     @ColumnInfo(name = "description")
     private String description;
 
     //===================================================
 
-    public int getId() {
-        return id;
+    public int getSpecies_id() {
+        return species_id;
     }
 
     public String getName() {
@@ -68,12 +64,12 @@ public class Species {
         return lifeSpan;
     }
 
-    public int getOrigin_Id() {
-        return origin_Id;
+    public int getOrigin_id() {
+        return origin_id;
     }
 
-    public int getFamily_Id() {
-        return family_Id;
+    public int getFamily_id() {
+        return family_id;
     }
 
     public String getDescription() {
@@ -83,8 +79,8 @@ public class Species {
     //==================================================
 
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSpecies_id(int id) {
+        this.species_id = id;
     }
 
     public void setName(String name) {
@@ -103,12 +99,12 @@ public class Species {
         this.lifeSpan = lifeSpan;
     }
 
-    public void setOrigin_Id(int origin_Id) {
-        this.origin_Id = origin_Id;
+    public void setOrigin_id(int origin_id) {
+        this.origin_id = origin_id;
     }
 
-    public void setFamily_Id(int family_Id) {
-        this.family_Id = family_Id;
+    public void setFamily_id(int family_id) {
+        this.family_id = family_id;
     }
 
     public void setDescription(String description) {

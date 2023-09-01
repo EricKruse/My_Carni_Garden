@@ -12,8 +12,8 @@ import androidx.room.Index;
                 @Index("substrate_id")
         },
         foreignKeys = {
-                @ForeignKey(entity = SubstrateComponent.class, parentColumns = "id", childColumns = "component_id"),
-                @ForeignKey(entity = Substrate.class, parentColumns = "id", childColumns = "substrate_id")
+                @ForeignKey(entity = SubstrateComponent.class, parentColumns = "component_id", childColumns = "component_id"),
+                @ForeignKey(entity = Substrate.class, parentColumns = "substrate_id", childColumns = "substrate_id")
         }
 )
 public class ComponentSubstrateCrossRef {

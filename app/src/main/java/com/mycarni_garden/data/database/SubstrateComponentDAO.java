@@ -29,9 +29,9 @@ public interface SubstrateComponentDAO {
     @Query("SELECT * FROM substrateComponent")
     List<SubstrateComponent> getAllComps();
 
-    @Query("SELECT * FROM substrateComponent WHERE id = :comp_id")
-    List<SubstrateComponent> getCompById(int comp_id);
+    @Query("SELECT * FROM substrateComponent WHERE component_id = :component_id")
+    List<SubstrateComponent> getCompById(int component_id);
 
-    @Query("SELECT id FROM substrateComponent WHERE material_id = :material_id AND parts = :parts")
+    @Query("SELECT material_id FROM substrateComponent WHERE material_id = :material_id AND parts = :parts")
     int getCompIdByMaterialAndParts(int material_id, double parts);
 }

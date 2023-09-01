@@ -12,8 +12,8 @@ import androidx.room.Index;
                 @Index("origin_id")
         },
         foreignKeys = {
-                @ForeignKey(entity = Lighting.class, parentColumns = "id", childColumns = "lighting_id"),
-                @ForeignKey(entity = Origins.class, parentColumns = "id", childColumns = "origin_id")
+                @ForeignKey(entity = Lighting.class, parentColumns = "lighting_id", childColumns = "lighting_id"),
+                @ForeignKey(entity = Origins.class, parentColumns = "origin_id", childColumns = "origin_id")
         }
 )
 public class LightingOriginCrossRef {

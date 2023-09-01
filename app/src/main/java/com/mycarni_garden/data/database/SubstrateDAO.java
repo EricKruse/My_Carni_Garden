@@ -33,13 +33,13 @@ public interface SubstrateDAO {
     @Query("SELECT * FROM substrates")
     List<Substrate> getAllSubstrates();
 
-    @Query("SELECT * FROM substrates WHERE id = :substrates_id")
+    @Query("SELECT * FROM substrates WHERE substrate_id = :substrates_id")
     List<Substrate> getSubstrateById(int substrates_id);
 
-    @Query("SELECT id FROM substrates WHERE name = :name")
+    @Query("SELECT substrate_id FROM substrates WHERE name = :name")
     int getSubstrateIdByName(String name);
 
     @Transaction
-    @Query("SELECT * FROM substrates WHERE id = :substrate_id")
+    @Query("SELECT * FROM substrates WHERE substrate_id = :substrate_id")
     LiveData<SubstrateWithComponents> getSubstrateWithComponentsById(long substrate_id);
 }

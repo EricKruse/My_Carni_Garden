@@ -27,10 +27,10 @@ public interface SpeciesDAO {
     @Query("SELECT * FROM species")
     List<Species> getAllSpecies();
 
-    @Query("SELECT * FROM species WHERE id = :species_id")
+    @Query("SELECT * FROM species WHERE species_id = :species_id")
     List<Species> getSpeciesById(int species_id);
 
     @Transaction
-    @Query("SELECT * FROM species WHERE id = :species_id")
+    @Query("SELECT * FROM species WHERE species_id = :species_id")
     LiveData<SpeciesWithSubstrates> getSpeciesWithSubstratesById(long species_id);
 }

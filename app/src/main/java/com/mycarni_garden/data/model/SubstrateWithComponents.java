@@ -12,7 +12,7 @@ public class SubstrateWithComponents {
     public Substrate substrate;
 
     @Relation(
-            parentColumn = "id",
+            parentColumn = "substrate_id",
             entityColumn = "component_id",
             associateBy = @Junction(ComponentSubstrateCrossRef.class)
     )

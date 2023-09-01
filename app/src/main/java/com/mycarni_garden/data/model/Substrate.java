@@ -12,8 +12,8 @@ import androidx.room.ColumnInfo;
 @Entity(tableName = "substrates")
 public class Substrate {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private long id;
+    @ColumnInfo(name = "substrate_id")
+    private long substrate_id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -31,12 +31,12 @@ public class Substrate {
 
     //=================================================
 
-    public long getId() {
-        return id;
+    public long getSubstrate_id() {
+        return substrate_id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSubstrate_id(long id) {
+        this.substrate_id = id;
     }
 
     public String getName() {

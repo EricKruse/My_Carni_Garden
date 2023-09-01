@@ -29,9 +29,9 @@ public interface MaterialDAO {
     @Query("SELECT * FROM material")
     List<Material> getAllMaterial();
 
-    @Query("SELECT * FROM material WHERE id = :material_id")
+    @Query("SELECT * FROM material WHERE material_id = :material_id")
     List<Material> getMaterialById(int material_id);
 
-    @Query("SELECT id FROM material WHERE name = :material_name")
+    @Query("SELECT material_id FROM material WHERE name = :material_name")
     int getMaterialIdByName(String material_name);
 }
