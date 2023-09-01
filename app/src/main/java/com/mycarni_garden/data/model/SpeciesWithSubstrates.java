@@ -12,8 +12,8 @@ public class SpeciesWithSubstrates {
     public Species species;
 
     @Relation(
-            parentColumn = "id",
-            entityColumn = "id",
+            parentColumn = "species_id",
+            entityColumn = "substrate_id",
             associateBy = @Junction(SubstrateSpeciesCrossRef.class)
     )
     public List<Substrate> substrates;

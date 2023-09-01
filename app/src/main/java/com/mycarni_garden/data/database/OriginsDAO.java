@@ -32,13 +32,13 @@ public interface OriginsDAO {
     @Query("SELECT * FROM origins")
     List<Origins> getAllOrigins();
 
-    @Query("SELECT * FROM origins WHERE id = :origin_id")
+    @Query("SELECT * FROM origins WHERE origin_id = :origin_id")
     List<Origins> getOriginById(int origin_id);
 
-    @Query("SELECT id FROM origins WHERE area = :area AND isHighland = :isHighland")
+    @Query("SELECT origin_id FROM origins WHERE area = :area AND isHighland = :isHighland")
     int getOriginIdByArea(String area, boolean isHighland);
 
     @Transaction
-    @Query("SELECT * FROM origins WHERE id = :origin_id")
+    @Query("SELECT * FROM origins WHERE origin_id = :origin_id")
     LiveData<OriginWithLighting> getOriginWithLightingById(long origin_id);
 }

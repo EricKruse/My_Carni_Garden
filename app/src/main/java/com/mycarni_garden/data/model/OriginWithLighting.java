@@ -12,7 +12,7 @@ public class OriginWithLighting {
     public Origins origin;
 
     @Relation(
-            parentColumn = "id",
+            parentColumn = "origin_id",
             entityColumn = "lighting_id",
             associateBy = @Junction(LightingOriginCrossRef.class)
     )

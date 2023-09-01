@@ -8,15 +8,15 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "substrateComponent",
         indices = {
-          @Index("material_id")
+          @Index("component_id")
         },
         foreignKeys = {
-                @ForeignKey(entity = Material.class, parentColumns = "id", childColumns = "material_id")
+                @ForeignKey(entity = Material.class, parentColumns = "material_id", childColumns = "material_id")
         })
 public class SubstrateComponent {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+    @ColumnInfo(name = "component_id")
+    private int component_id;
 
     @ColumnInfo(name = "material_id")
     private int material_id;
@@ -32,12 +32,12 @@ public class SubstrateComponent {
         this.parts = parts;
     }
 
-    public int getId() {
-        return id;
+    public int getComponent_id() {
+        return component_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setComponent_id(int id) {
+        this.component_id = id;
     }
 
     public int getMaterial_id() {

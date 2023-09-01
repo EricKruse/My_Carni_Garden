@@ -29,9 +29,9 @@ public interface LightingDAO {
     @Query("SELECT * FROM lighting")
     List<Lighting> getAllLighting();
 
-    @Query("SELECT * FROM lighting WHERE id = :lighting_id")
+    @Query("SELECT * FROM lighting WHERE lighting_id = :lighting_id")
     List<Lighting> getLightingById(int lighting_id);
 
-    @Query("SELECT id FROM lighting WHERE name = :name")
+    @Query("SELECT lighting_id FROM lighting WHERE name = :name")
     int getLightingIdByName(String name);
 }
