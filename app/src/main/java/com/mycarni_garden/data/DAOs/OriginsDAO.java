@@ -1,4 +1,4 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -9,8 +9,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.mycarni_garden.data.model.Families;
-import com.mycarni_garden.data.model.OriginWithLighting;
+import com.mycarni_garden.data.operations.OriginWithLighting;
 import com.mycarni_garden.data.model.Origins;
 
 import java.util.List;
@@ -30,10 +29,10 @@ public interface OriginsDAO {
     void Delete(Origins origins);
 
     @Query("SELECT * FROM origins")
-    List<Origins> getAllOrigins();
+    LiveData<List<Origins>> getAllOrigins();
 
     @Query("SELECT * FROM origins WHERE origin_id = :origin_id")
-    List<Origins> getOriginById(int origin_id);
+    LiveData<Origins> getOriginById(int origin_id);
 
     @Query("SELECT origin_id FROM origins WHERE area = :area AND isHighland = :isHighland")
     int getOriginIdByArea(String area, boolean isHighland);

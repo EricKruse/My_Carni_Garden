@@ -1,5 +1,6 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -26,9 +27,9 @@ public interface FamiliesDAO {
     void Delete(Families families);
 
     @Query("SELECT * FROM families")
-    List<Families> getAllFamilies();
+    LiveData<List<Families>> getAllFamilies();
 
     @Query("SELECT * FROM families WHERE family_id = :family_id")
-    List<Families> getFamilyById(int family_id);
+    LiveData<Families> getFamilyById(int family_id);
 }
 

@@ -1,5 +1,6 @@
 package com.mycarni_garden.data.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;

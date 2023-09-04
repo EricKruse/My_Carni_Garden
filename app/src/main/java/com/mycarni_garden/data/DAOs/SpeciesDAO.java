@@ -1,4 +1,4 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -9,7 +9,7 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.mycarni_garden.data.model.Species;
-import com.mycarni_garden.data.model.SpeciesWithSubstrates;
+import com.mycarni_garden.data.operations.SpeciesWithSubstrates;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ public interface SpeciesDAO {
     void Delete(Species species);
 
     @Query("SELECT * FROM species")
-    List<Species> getAllSpecies();
+    LiveData<List<Species>> getAllSpecies();
 
     @Query("SELECT * FROM species WHERE species_id = :species_id")
-    List<Species> getSpeciesById(int species_id);
+    LiveData<Species> getSpeciesById(int species_id);
 
     @Transaction
     @Query("SELECT * FROM species WHERE species_id = :species_id")

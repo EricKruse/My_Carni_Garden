@@ -8,12 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mycarni_garden.data.database.LightingDAO;
+import com.mycarni_garden.data.DAOs.LightingDAO;
 import com.mycarni_garden.data.model.Lighting;
-import com.mycarni_garden.ui.models.column_create_ingredient;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class RV_Adapter_lighting extends RecyclerView.Adapter<RV_Adapter_lighting.ViewHolder> {
 

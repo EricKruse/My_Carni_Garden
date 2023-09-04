@@ -1,9 +1,12 @@
-package com.mycarni_garden.data.model;
+package com.mycarni_garden.data.operations;
 
 import androidx.room.Embedded;
-import androidx.room.Entity;
 import androidx.room.Junction;
 import androidx.room.Relation;
+
+import com.mycarni_garden.data.model.Lighting;
+import com.mycarni_garden.data.model.LightingOriginCrossRef;
+import com.mycarni_garden.data.model.Origins;
 
 import java.util.List;
 

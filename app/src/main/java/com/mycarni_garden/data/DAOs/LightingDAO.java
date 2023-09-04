@@ -1,5 +1,6 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -27,10 +28,10 @@ public interface LightingDAO {
     void Delete(Lighting lighting);
 
     @Query("SELECT * FROM lighting")
-    List<Lighting> getAllLighting();
+    LiveData<List<Lighting>> getAllLighting();
 
     @Query("SELECT * FROM lighting WHERE lighting_id = :lighting_id")
-    List<Lighting> getLightingById(int lighting_id);
+    LiveData<Lighting> getLightingById(int lighting_id);
 
     @Query("SELECT lighting_id FROM lighting WHERE name = :name")
     int getLightingIdByName(String name);
