@@ -1,4 +1,4 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

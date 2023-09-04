@@ -1,9 +1,12 @@
-package com.mycarni_garden.data.model;
+package com.mycarni_garden.data.operations;
 
 import androidx.room.Embedded;
-import androidx.room.Entity;
 import androidx.room.Junction;
 import androidx.room.Relation;
+
+import com.mycarni_garden.data.model.ComponentSubstrateCrossRef;
+import com.mycarni_garden.data.model.Substrate;
+import com.mycarni_garden.data.model.SubstrateComponent;
 
 import java.util.List;
 

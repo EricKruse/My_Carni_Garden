@@ -1,12 +1,10 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 
 import com.mycarni_garden.data.model.ComponentSubstrateCrossRef;
-import com.mycarni_garden.data.model.Families;
-import com.mycarni_garden.data.model.SubstrateWithComponents;
 
 import java.util.List;
 

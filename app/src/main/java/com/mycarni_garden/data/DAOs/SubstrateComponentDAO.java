@@ -1,5 +1,6 @@
-package com.mycarni_garden.data.database;
+package com.mycarni_garden.data.DAOs;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -7,7 +8,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.mycarni_garden.data.model.Families;
 import com.mycarni_garden.data.model.SubstrateComponent;
 
 import java.util.List;
@@ -27,10 +27,10 @@ public interface SubstrateComponentDAO {
     void Delete(SubstrateComponent comp);
 
     @Query("SELECT * FROM substrateComponent")
-    List<SubstrateComponent> getAllComps();
+    LiveData<List<SubstrateComponent>> getAllComps();
 
     @Query("SELECT * FROM substrateComponent WHERE component_id = :component_id")
-    List<SubstrateComponent> getCompById(int component_id);
+    LiveData<SubstrateComponent> getCompById(int component_id);
 
     @Query("SELECT material_id FROM substrateComponent WHERE material_id = :material_id AND parts = :parts")
     int getCompIdByMaterialAndParts(int material_id, double parts);

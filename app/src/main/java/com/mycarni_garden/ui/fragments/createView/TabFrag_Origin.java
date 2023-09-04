@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycarni_garden.R;
 import com.mycarni_garden.data.database.AppDatabase;
-import com.mycarni_garden.data.database.LightingDAO;
+import com.mycarni_garden.data.DAOs.LightingDAO;
 import com.mycarni_garden.data.model.Lighting;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class TabFrag_Origin extends Fragment{
 
     private AppDatabase db;
     private RecyclerView rv_lighting;
-    private List<Lighting> lightings = new ArrayList<>();
+    private LiveData<List<Lighting>> lightings = new MutableLiveData<>();
     private LightingDAO lightingDAO;
 
     @Override
