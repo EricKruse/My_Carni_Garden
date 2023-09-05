@@ -52,14 +52,15 @@
         <ImageButton
             android:id="@+id/dropDown_arrow"
             android:layout_gravity="center_vertical"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/arrow_down_drop_circle_outline" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        tools:listitem="@layout/detail_column_substrate_ingredient" />
 
 </LinearLayout>

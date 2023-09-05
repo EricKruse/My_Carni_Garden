@@ -1,5 +1,6 @@
 package com.mycarni_garden.ui.adapters;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -8,58 +9,46 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mycarni_garden.R;
 import com.mycarni_garden.data.DAOs.LightingDAO;
 import com.mycarni_garden.data.model.Lighting;
 
 import java.util.ArrayList;
+import java.util.List;
 
-class RV_Adapter_lighting extends RecyclerView.Adapter<RV_Adapter_lighting.ViewHolder> {
+public class RV_Adapter_lighting extends RecyclerView.Adapter<RV_Adapter_lighting.LightingHolder> {
+    private ArrayList<Lighting> lightings = new ArrayList<>();
 
-    private RecyclerView rv_lighting;
-    private ArrayList<Lighting> lightings;
-    private View view;
-    private LightingDAO lightingDAO;
+    class LightingHolder extends RecyclerView.ViewHolder {
+        private SwitchCompat switchCompat;
 
-    public RV_Adapter_lighting(RecyclerView rv_lighting, ArrayList<Lighting> lightings) {
-        this.lightings = lightings;
-        this.rv_lighting = rv_lighting;
-        ViewGroup parent = (ViewGroup) rv_lighting.getParent();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout layout;
-        SwitchCompat switchLighting;
-
-        ViewHolder(View itemView) {
+        LightingHolder(View itemView) {
             super(itemView);
-            layout = (LinearLayout) itemView;
-            switchLighting = new SwitchCompat(itemView.getContext());
-            switchLighting.setLayoutParams(new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            ));
-            layout.addView(switchLighting);
+            switchCompat = itemView.findViewById(R.id.column_lighting);
         }
     }
 
     @NonNull
     @Override
-    public RV_Adapter_lighting.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LinearLayout layout = new LinearLayout(parent.getContext());
-        layout.setLayoutParams(new RecyclerView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
-        return new RV_Adapter_lighting.ViewHolder(layout);
+    public RV_Adapter_lighting.LightingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.detail_column_lighting, parent, false);
+        return new LightingHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RV_Adapter_lighting.ViewHolder holder, int position) {
-        Lighting lighting_data = lightings.get(position);
+    public void onBindViewHolder(@NonNull LightingHolder holder, int position) {
+        Lighting currentLighting = lightings.get(position);
+        holder.switchCompat.setText(currentLighting.getName());
     }
 
     @Override
     public int getItemCount() {
         return lightings.size();
+    }
+
+    public void setLightingList(List<Lighting> lightings) {
+        this.lightings = (ArrayList<Lighting>) lightings;
+        notifyDataSetChanged();
     }
 }
