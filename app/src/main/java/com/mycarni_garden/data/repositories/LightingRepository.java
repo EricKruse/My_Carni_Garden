@@ -37,7 +37,7 @@ public class LightingRepository {
         return lightingDao.getLightingById(lighting_id);
     }
 
-    public LiveData<List<Lighting>> getAllFamilies() {
+    public LiveData<List<Lighting>> getAllLighting() {
         return allLighting;
     }
 

@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.mycarni_garden.R;
 
-public class column_create_ingredient {
+public class  column_create_ingredient {
     private EditText editTextMaterial;
     private EditText editTextParts;
 
