@@ -44,6 +44,10 @@ public class CreatePlantFragment extends Fragment {
         return rootView;
     }
 
+    private void saveFiles(){
+        
+    }
+
     private void initViews(View rootView) {
         viewPager = rootView.findViewById(R.id.viewPager_createPlantTabs);
         TabLayout tabLayout = rootView.findViewById(R.id.createPlantTabs);

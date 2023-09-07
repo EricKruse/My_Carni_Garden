@@ -20,16 +20,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/check_circle" />
 
-    <EditText
-        android:id="@+id/editText_continent"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_continent"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.7"
         android:layout_height="48dp"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="@string/hint_continent"
         android:inputType="text"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:contentDescription="@string/spinner_continent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +47,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_continent" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_continent" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch_highland"
