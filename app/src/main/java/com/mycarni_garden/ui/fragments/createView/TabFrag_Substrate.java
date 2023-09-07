@@ -9,13 +9,18 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.mycarni_garden.R;
+import com.mycarni_garden.data.model.Substrate;
 import com.mycarni_garden.ui.adapters.RV_Adapter_addIngredient;
+import com.mycarni_garden.ui.adapters.RV_Adapter_substrates;
 import com.mycarni_garden.ui.models.column_create_ingredient;
+import com.mycarni_garden.ui.viewmodels.SubstrateViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,9 @@ public class TabFrag_Substrate extends Fragment{
     private ImageButton btn_create;
     private ImageButton btn_cancel;
     private RecyclerView rv_addIngredients;
+    private RecyclerView rv_substrates;
+    private SubstrateViewModel substrateViewModel;
+    private RV_Adapter_substrates rv_adapter_substrates;
 
     private List<column_create_ingredient> Ingredients = new ArrayList<>();
 
@@ -39,6 +47,7 @@ public class TabFrag_Substrate extends Fragment{
         btn_create = rootView.findViewById(R.id.btn_addSubstrate);
         btn_cancel = rootView.findViewById(R.id.btn_cancelCreateSubstrate);
         rv_addIngredients = rootView.findViewById(R.id.rv_addSubsIngredients);
+        rv_substrates = rootView.findViewById(R.id.rv_substrates);
 
         // Setup create toggle ---------------------------------------------------------------------
         btn_create.setOnClickListener(clickedView -> toggleCreateSubstrate(false));
@@ -51,6 +60,19 @@ public class TabFrag_Substrate extends Fragment{
 
         // RV setup --------------------------------------------------------------------------------
         rv_addIngredients.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        rv_substrates.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        rv_adapter_substrates = new RV_Adapter_substrates();
+        rv_substrates.setAdapter(rv_adapter_substrates);
+
+        substrateViewModel = new ViewModelProvider(this).get(SubstrateViewModel.class);
+        substrateViewModel.getAllSubstrates().observe(getViewLifecycleOwner(), new Observer<List<Substrate>>() {
+            @Override
+            public void onChanged(List<Substrate> substrates) {
+                rv_adapter_substrates.setSubstrateList(substrates);
+            }
+        });
 
         // Switch tabs alternative btn -------------------------------------------------------------
         ImageButton btn_goToOrigin = rootView.findViewById(R.id.goToOrigin);

@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -73,7 +72,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 Log.d("AppDatabase", "Attempting to create database...");
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                 AppDatabase.class,
-                                "myCarniGarden.db")
+                                "myCarniGarden_database")
                         .fallbackToDestructiveMigration()
                         .addCallback(roomCallback)
                         .build();
@@ -90,9 +89,6 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new PopulateDB_AT(INSTANCE).execute();
-            /*Executors.newSingleThreadExecutor().execute(() -> {
-                INSTANCE.populateInitialData();
-            });*/
         }
     };
 
@@ -229,7 +225,7 @@ public abstract class AppDatabase extends RoomDatabase {
             // Combine Substrates
 
             int standardSub_id = substrateDao.getSubstrateIdByName(standardSub);
-            int standardJapSub_id = substrateDao.getSubstrateIdByName(cocoSub);
+            int standardJapSub_id = substrateDao.getSubstrateIdByName(standardJapSub);
             int highlandSub_id = substrateDao.getSubstrateIdByName(highlandSub);
             int mineralSub_id = substrateDao.getSubstrateIdByName(mineralSub);
             int cocoSub_id = substrateDao.getSubstrateIdByName(cocoSub);

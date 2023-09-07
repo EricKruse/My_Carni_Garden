@@ -37,7 +37,7 @@ public class ComponentRepository {
         return subCompDao.getCompById(substrateComponent_id);
     }
 
-    public LiveData<List<SubstrateComponent>> getAllSubstrateComponent() {
+    public LiveData<List<SubstrateComponent>> getAllSubstrateComponents() {
         return allSubstrateComponents;
     }
 
