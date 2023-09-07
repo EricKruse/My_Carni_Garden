@@ -34,4 +34,5 @@
     <string name="upload_an_image">Upload an image</string>
     <string name="lighting">Lighting</string>
     <string name="winter">Winter:</string>
+    <string name="substrate_switch">Selection mode of Substrate</string>
 </resources>

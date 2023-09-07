@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_column_substrate"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -23,6 +24,7 @@
             app:srcCompat="@drawable/sprout" />
 
         <TextView
+            android:id="@+id/textView_substrateName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,6 +43,7 @@
             app:srcCompat="@drawable/watering_can" />
 
         <TextView
+            android:id="@+id/textView_watering"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -49,15 +52,16 @@
             android:layout_marginEnd="24dp"
             tools:text="daily" />
 
-        <ImageButton
-            android:id="@+id/dropDown_arrow"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_selectSubstrate"
             android:layout_gravity="center_vertical"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:srcCompat="@drawable/arrow_down_drop_circle_outline" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/substrate_switch"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_components"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"

@@ -41,7 +41,7 @@ public class SubstrateRepository {
         return substrateDao.getSubstrateIdByName(name);
     }
     
-    public LiveData<List<Substrate>> getAllSubstrate() {
+    public LiveData<List<Substrate>> getAllSubstrates() {
         return allSubstrates;
     }
 

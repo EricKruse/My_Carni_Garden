@@ -37,7 +37,7 @@ public class MaterialRepository {
         return materialDao.getMaterialById(Material_id);
     }
 
-    public LiveData<List<Material>> getAllMaterial() {
+    public LiveData<List<Material>> getAllMaterials() {
         return allMaterials;
     }
 
