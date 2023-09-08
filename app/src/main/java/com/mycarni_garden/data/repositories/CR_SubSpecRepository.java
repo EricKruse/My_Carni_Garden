@@ -4,9 +4,12 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 
 import com.mycarni_garden.data.DAOs.SubSpecCrossRefDAO;
 import com.mycarni_garden.data.database.AppDatabase;
+import com.mycarni_garden.data.model.ComponentSubstrateCrossRef;
 import com.mycarni_garden.data.model.SubstrateSpeciesCrossRef;
 
 import java.util.List;
@@ -23,6 +26,11 @@ public class CR_SubSpecRepository {
 
     public void insert(SubstrateSpeciesCrossRef SubstrateSpeciesCrossRef) {
         new InsertSubstrateSpecies_CR_AT(subSpecCRDao).execute(SubstrateSpeciesCrossRef);
+    }
+
+    public void insertList(LiveData<List<SubstrateSpeciesCrossRef>> cr_list){
+        new InsertSubstrateSpecies_CR_AT(subSpecCRDao);
+        AsyncTask.execute((Runnable) cr_list);
     }
 
     //-------------- Async tasks ---------------------------

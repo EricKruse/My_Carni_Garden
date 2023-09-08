@@ -11,16 +11,24 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.mycarni_garden.R;
+import com.mycarni_garden.data.model.Origins;
+import com.mycarni_garden.data.model.Species;
 import com.mycarni_garden.ui.adapters.FS_Adapter_CreatePlant;
+import com.mycarni_garden.ui.viewmodels.FamiliesViewModel;
+import com.mycarni_garden.ui.viewmodels.LightingViewModel;
+import com.mycarni_garden.ui.viewmodels.OriginsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreatePlantFragment extends Fragment {
+
 
     private ViewPager2 viewPager;
     private View rootView;
@@ -82,7 +90,8 @@ public class CreatePlantFragment extends Fragment {
 
     private String species_name;
     private String family;
-    private String growth;
+    private String growth_text;
+    private int growth;
     private String lifespan;
     private String description;
 
@@ -91,12 +100,13 @@ public class CreatePlantFragment extends Fragment {
     private String continent;
     private String area;
     private boolean isHighlander;
+    private int winterLvl;
     private List<Integer> lighting_ids = new ArrayList<>();
 
     void saveInfo(String species_name, String family, String growth, String lifespan, String description) {
         this.species_name = species_name;
         this.family = family;
-        this.growth = growth;
+        this.growth_text = growth;
         this.lifespan = lifespan;
         this.description = description;
     }
@@ -105,19 +115,20 @@ public class CreatePlantFragment extends Fragment {
         this.substrate_ids = substrate_ids;
     }
 
-    void saveOrigin(String continent, String area, boolean isHighlander, List<Integer> lighting_ids){
+    void saveOrigin(String continent, String area, boolean isHighlander, int winterLvl, List<Integer> lighting_ids){
         this.continent = continent;
         this.area = area;
         this.isHighlander = isHighlander;
+        this.winterLvl = winterLvl;
         this.lighting_ids = lighting_ids;
     }
     
-    void persistFile(){
+    void persistFiles(){
         boolean isComplete = true;
-        String[] toCheck = {species_name, growth, lifespan, description, area};
+        String[] toCheck = {species_name, String.valueOf(growth), lifespan, description, area};
         for (String item :
                 toCheck) {
-            if (item.trim().equals("")) {
+            if ((item.trim().equals(""))) {
                 isComplete = false;
                 break;
             }
@@ -125,8 +136,21 @@ public class CreatePlantFragment extends Fragment {
         if (substrate_ids.size() == 0 || lighting_ids.size() == 0) isComplete = false;
         if (!isComplete){
             Toast.makeText(getContext(), "Please fill all elements!", Toast.LENGTH_SHORT).show();
-            //return;
+            return;
         }
 
+        //------- Start persisting
+
+        Origins newOrigin = new Origins(continent, area, isHighlander, winterLvl);
+        OriginsViewModel originsViewModel = new ViewModelProvider(this).get(OriginsViewModel.class);
+        originsViewModel.insert(newOrigin);
+
+        LiveData<Integer> newOrigin_id = originsViewModel.getOriginIdByArea(area, isHighlander);
+
+        FamiliesViewModel familiesViewModel = new ViewModelProvider(this).get(FamiliesViewModel.class);
+        LiveData<Integer> family_id = familiesViewModel.getFamilyIdByName(family);
+
+        growth = Integer.parseInt(growth_text);
+        //Species newSpecies = new Species(species_name, growth, lifespan, family_id.getValue(), newOrigin_id.getValue(), description);
     }
 }

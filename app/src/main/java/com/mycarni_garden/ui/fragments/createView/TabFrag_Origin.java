@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,6 +42,9 @@ public class TabFrag_Origin extends Fragment implements AdapterView.OnItemSelect
     private Spinner spinner_continent;
     private ArrayAdapter<CharSequence> spinner_continent_adapter;
 
+    private Spinner spinner_winter;
+    private ArrayAdapter<CharSequence> spinner_winter_adapter;
+
     public TabFrag_Origin(CreatePlantFragment parentClass) {
         this.parentClass = parentClass;
     }
@@ -60,6 +64,12 @@ public class TabFrag_Origin extends Fragment implements AdapterView.OnItemSelect
         spinner_continent.setAdapter(spinner_continent_adapter);
         spinner_continent.setOnItemSelectedListener(this);
 
+        spinner_winter = rootView.findViewById(R.id.spinner_winter);
+        spinner_winter_adapter = ArrayAdapter.createFromResource(getContext(), R.array.winter, android.R.layout.simple_spinner_item);
+        spinner_winter_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_winter.setAdapter(spinner_winter_adapter);
+        spinner_winter.setOnItemSelectedListener(this);
+
         rv_lighting = rootView.findViewById(R.id.rv_lighting);
         rv_lighting.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -74,6 +84,9 @@ public class TabFrag_Origin extends Fragment implements AdapterView.OnItemSelect
             }
         });
 
+        ImageButton btn_submitPlant = rootView.findViewById(R.id.submitPlant);
+        btn_submitPlant.setOnClickListener(clickedView -> submitPlant());
+
         return rootView;
     }
 
@@ -87,14 +100,17 @@ public class TabFrag_Origin extends Fragment implements AdapterView.OnItemSelect
 
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
+        updateData();
+    }
 
+    private void updateData() {
         String continent = spinner_continent.getItemAtPosition(spinner_continent.getSelectedItemPosition()).toString();
         String area = area_field.getText().toString();
         boolean isHighlander = highlands_field.isChecked();
+        int winterMode = spinner_winter.getSelectedItemPosition();
 
         List<Integer> selectedLighting = new ArrayList<>();
         for (int i = 0; i < rv_adapter_lighting.getItemCount(); i++) {
@@ -105,7 +121,12 @@ public class TabFrag_Origin extends Fragment implements AdapterView.OnItemSelect
                 if (switchCompat.isChecked()) selectedLighting.add(column.getLighting_id());
             }
         }
+        parentClass.saveOrigin(continent, area, isHighlander, winterMode, selectedLighting);
 
-        parentClass.saveOrigin(continent, area, isHighlander, selectedLighting);
+    }
+
+    private void submitPlant(){
+        updateData();
+        parentClass.persistFiles();
     }
 }

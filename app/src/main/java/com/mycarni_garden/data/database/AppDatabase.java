@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.mycarni_garden.data.DAOs.CompSubCrossRefDAO;
@@ -47,7 +48,7 @@ import java.util.List;
             LightingOriginCrossRef.class,
             SubstrateSpeciesCrossRef.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract SpeciesDAO speciesDao();
@@ -74,6 +75,8 @@ public abstract class AppDatabase extends RoomDatabase {
                                 AppDatabase.class,
                                 "myCarniGarden_database")
                         .fallbackToDestructiveMigration()
+                        .fallbackToDestructiveMigrationOnDowngrade()
+                        .addMigrations(MIGRATION_1_2)
                         .addCallback(roomCallback)
                         .build();
             } catch (Exception e) {
@@ -183,7 +186,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
             List<Substrate> substrates = new ArrayList<>();
             substrates.add(new Substrate(standardSub, 3));
-            substrates.add(new Substrate(highlandSub, 3));
+            substrates.add(new Substrate(highlandSub, 4));
             substrates.add(new Substrate(mineralSub, 2));
             substrates.add(new Substrate(cocoSub, 2));
             substrates.add(new Substrate(standardJapSub, 3));
@@ -247,13 +250,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
             // Combine Origins and Lighting
 
-            int borneoUp_id = originsDao.getOriginIdByArea(borneo, true);
-            int borneoDown_id = originsDao.getOriginIdByArea(borneo, false);
-            int sulawesiUp_id = originsDao.getOriginIdByArea(sulawesi, true);
-            int sulawesiDown_id = originsDao.getOriginIdByArea(sulawesi, false);
-            int eastCoastUSA_id = originsDao.getOriginIdByArea(eastCoastUSA, false);
-            int nwUSA_id = originsDao.getOriginIdByArea(nwUSA, false);
-            int capensis_id = originsDao.getOriginIdByArea(capensis, false);
+            int borneoUp_id = originsDao.getOriginIdByArea(borneo, true).getValue();
+            int borneoDown_id = originsDao.getOriginIdByArea(borneo, false).getValue();
+            int sulawesiUp_id = originsDao.getOriginIdByArea(sulawesi, true).getValue();
+            int sulawesiDown_id = originsDao.getOriginIdByArea(sulawesi, false).getValue();
+            int eastCoastUSA_id = originsDao.getOriginIdByArea(eastCoastUSA, false).getValue();
+            int nwUSA_id = originsDao.getOriginIdByArea(nwUSA, false).getValue();
+            int capensis_id = originsDao.getOriginIdByArea(capensis, false).getValue();
             int sunny_id = lightingDao.getLightingIdByName(sunny);
             int bright_id = lightingDao.getLightingIdByName(bright);
             int halfShade_id = lightingDao.getLightingIdByName(hShade);
@@ -282,4 +285,32 @@ public abstract class AppDatabase extends RoomDatabase {
             return null;
         }
     }
+
+    //--------------- Migration
+
+    public static final Migration MIGRATION_1_2 = new Migration(1,2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE species_temp (" +
+                    "species_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    "family_id INTEGER NOT NULL, " +
+                    "lifeSpan TEXT, " +
+                    "maxHeightInCm INTEGER NOT NULL, " +
+                    "name TEXT, " +
+                    "description TEXT, " +
+                    "origin_id INTEGER NOT NULL," +
+
+                    "FOREIGN KEY (family_id) REFERENCES families(family_id)," +
+                    "FOREIGN KEY (origin_id) REFERENCES origins(origin_id)" +
+                    ")");
+            database.execSQL("DROP INDEX index_species_species_id");
+            database.execSQL("CREATE INDEX index_species_species_id ON species_temp (species_id)");
+
+            database.execSQL("INSERT INTO species_temp (species_id, name, maxHeightInCm, lifeSpan, origin_id, family_id, description) " +
+                    "SELECT species_id, name, CAST(maxHeightInCm AS INTEGER), lifeSpan, origin_id, family_id, description FROM species");
+
+            database.execSQL("DROP TABLE species");
+            database.execSQL("ALTER TABLE species_temp RENAME TO species");
+        }
+    };
 }

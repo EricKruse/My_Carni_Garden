@@ -37,7 +37,7 @@ public class OriginsRepository {
         return originsDao.getOriginById(origin_id);
     }
 
-    public int getOriginIdByArea(String area, boolean isHighland) {
+    public LiveData<Integer> getOriginIdByArea(String area, boolean isHighland) {
         return originsDao.getOriginIdByArea(area, isHighland);
     }
 

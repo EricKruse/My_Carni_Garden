@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.mycarni_garden.R;
@@ -82,15 +81,10 @@ public class TabFrag_Info extends Fragment implements AdapterView.OnItemSelected
 
     }
 
-    public interface IF_onInfoTabPausedListener {
-        public void onInfoFragmentPaused(List<String> contents);
-    }
-
-    private IF_onInfoTabPausedListener onPausedListener;
-
     @Override
     public void onPause() {
         super.onPause();
+
         parentClass.saveInfo(
                 species_name_field.getText().toString(),
                 spinner_families.getItemAtPosition(spinner_families.getSelectedItemPosition()).toString(),
