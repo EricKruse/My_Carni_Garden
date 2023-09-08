@@ -37,6 +37,7 @@
     <string name="substrate_switch">Selection mode of Substrate</string>
     <string name="spinner_family">Select a family</string>
     <string name="spinner_continent">Select a continent</string>
+    <string name="spinner_winter">Select a winter level</string>
 
     <string-array name="continents">
         <item>Europe</item>
@@ -62,5 +63,11 @@
         <item>Roridula</item>
         <item>Sarracenia</item>
         <item>Utricularia</item>
+    </string-array>
+
+    <string-array name="winter">
+        <item>None</item>
+        <item>Mild</item>
+        <item>Full</item>
     </string-array>
 </resources>

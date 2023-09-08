@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,6 +28,8 @@ import java.util.List;
 
 public class TabFrag_Substrate extends Fragment{
 
+    private CreatePlantFragment parentClass;
+
     private ViewPager2 viewPager;
     private View rootView;
     private ImageButton btn_create;
@@ -37,6 +40,11 @@ public class TabFrag_Substrate extends Fragment{
     private RV_Adapter_substrates rv_adapter_substrates;
 
     private List<column_create_ingredient> Ingredients = new ArrayList<>();
+
+    public TabFrag_Substrate(CreatePlantFragment parentClass) {
+        this.parentClass = parentClass;
+    }
+    public TabFrag_Substrate(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,5 +116,20 @@ public class TabFrag_Substrate extends Fragment{
         } else {
             btn_create.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        List<Integer> selectedSubstrates = new ArrayList<>();
+        for (int i = 0; i < rv_adapter_substrates.getItemCount(); i++) {
+            RecyclerView.ViewHolder viewHolder = rv_substrates.findViewHolderForAdapterPosition(i);
+            if (viewHolder instanceof RV_Adapter_substrates.SubstrateHolder){
+                RV_Adapter_substrates.SubstrateHolder column = (RV_Adapter_substrates.SubstrateHolder) viewHolder;
+                SwitchCompat switchCompat = column.getSelectSwitch();
+                if (switchCompat.isChecked()) selectedSubstrates.add(column.getSubstrate_id());
+            }
+        }
+        parentClass.saveSubstrate(selectedSubstrates);
     }
 }

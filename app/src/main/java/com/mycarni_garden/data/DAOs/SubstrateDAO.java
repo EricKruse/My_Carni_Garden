@@ -31,8 +31,8 @@ public interface SubstrateDAO {
     @Query("SELECT * FROM substrates")
     LiveData<List<Substrate>> getAllSubstrates();
 
-    @Query("SELECT * FROM substrates WHERE substrate_id = :substrates_id")
-    LiveData<Substrate> getSubstrateById(int substrates_id);
+    @Query("SELECT * FROM substrates WHERE substrate_id = :substrate_id")
+    LiveData<Substrate> getSubstrateById(int substrate_id);
 
     @Query("SELECT substrate_id FROM substrates WHERE name = :name")
     int getSubstrateIdByName(String name);

@@ -25,13 +25,10 @@ public class Species {
     private String name;
 
     @ColumnInfo(name = "maxHeightInCm")
-    private Double maxHeightInCm;
-
-    @ColumnInfo(name = "needsAirflow")
-    private Boolean needsAirflow;
+    private int maxHeightInCm;
 
     @ColumnInfo(name = "lifeSpan")
-    private Double lifeSpan;
+    private String lifeSpan;
 
     @ColumnInfo(name = "origin_id")
     private int origin_id;
@@ -41,6 +38,15 @@ public class Species {
 
     @ColumnInfo(name = "description")
     private String description;
+
+    public Species(String name, int maxHeightInCm, String lifeSpan, int origin_id, int family_id, String description) {
+        this.name = name;
+        this.maxHeightInCm = maxHeightInCm;
+        this.lifeSpan = lifeSpan;
+        this.origin_id = origin_id;
+        this.family_id = family_id;
+        this.description = description;
+    }
 
     //===================================================
 
@@ -52,15 +58,11 @@ public class Species {
         return name;
     }
 
-    public Double getMaxHeightInCm() {
+    public int getMaxHeightInCm() {
         return maxHeightInCm;
     }
 
-    public Boolean getNeedsAirflow() {
-        return needsAirflow;
-    }
-
-    public Double getLifeSpan() {
+    public String getLifeSpan() {
         return lifeSpan;
     }
 
@@ -87,15 +89,11 @@ public class Species {
         this.name = name;
     }
 
-    public void setMaxHeightInCm(Double maxHeightInCm) {
+    public void setMaxHeightInCm(int maxHeightInCm) {
         this.maxHeightInCm = maxHeightInCm;
     }
 
-    public void setNeedsAirflow(Boolean needsAirflow) {
-        this.needsAirflow = needsAirflow;
-    }
-
-    public void setLifeSpan(Double lifeSpan) {
+    public void setLifeSpan(String lifeSpan) {
         this.lifeSpan = lifeSpan;
     }
 
@@ -111,3 +109,4 @@ public class Species {
         this.description = description;
     }
 }
+

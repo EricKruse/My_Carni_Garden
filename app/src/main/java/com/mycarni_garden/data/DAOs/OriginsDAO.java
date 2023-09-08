@@ -35,7 +35,10 @@ public interface OriginsDAO {
     LiveData<Origins> getOriginById(int origin_id);
 
     @Query("SELECT origin_id FROM origins WHERE area = :area AND isHighland = :isHighland")
-    int getOriginIdByArea(String area, boolean isHighland);
+    LiveData<Integer> getOriginIdByArea(String area, boolean isHighland);
+
+    @Query("SELECT origin_id FROM origins WHERE continent = :continent AND area = :area AND isHighland = :isHighland")
+    LiveData<Integer> getOriginWithThree(String continent, String area, boolean isHighland);
 
     @Transaction
     @Query("SELECT * FROM origins WHERE origin_id = :origin_id")

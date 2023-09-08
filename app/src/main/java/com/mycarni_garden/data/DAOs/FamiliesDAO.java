@@ -31,5 +31,8 @@ public interface FamiliesDAO {
 
     @Query("SELECT * FROM families WHERE family_id = :family_id")
     LiveData<Families> getFamilyById(int family_id);
+
+    @Query("SELECT family_id FROM families WHERE name = :name")
+    LiveData<Integer> getFamilyIdByName(String name);
 }
 

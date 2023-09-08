@@ -1,11 +1,6 @@
 package com.mycarni_garden.data.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.core.view.KeyEventDispatcher;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 
@@ -13,7 +8,7 @@ import androidx.room.ColumnInfo;
 public class Substrate {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "substrate_id")
-    private long substrate_id;
+    private int substrate_id;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -31,11 +26,11 @@ public class Substrate {
 
     //=================================================
 
-    public long getSubstrate_id() {
+    public int getSubstrate_id() {
         return substrate_id;
     }
 
-    public void setSubstrate_id(long id) {
+    public void setSubstrate_id(int id) {
         this.substrate_id = id;
     }
 

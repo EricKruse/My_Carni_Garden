@@ -7,14 +7,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.mycarni_garden.data.model.Lighting;
 import com.mycarni_garden.ui.fragments.createView.CreatePlantFragment;
+import com.mycarni_garden.ui.fragments.createView.TabFrag_Info;
 import com.mycarni_garden.ui.viewmodels.LightingViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

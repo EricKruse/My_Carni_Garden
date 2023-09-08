@@ -37,6 +37,10 @@ public class FamiliesRepository {
         return familiesDao.getFamilyById(family_id);
     }
 
+    public LiveData<Integer> getFamilyIdByName(String name){
+        return familiesDao.getFamilyIdByName(name);
+    }
+
     public LiveData<List<Families>> getAllFamilies() {
         return allFamilies;
     }

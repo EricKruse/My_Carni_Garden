@@ -18,11 +18,12 @@ import java.util.List;
 public class RV_Adapter_substrates extends RecyclerView.Adapter<RV_Adapter_substrates.SubstrateHolder> {
     private ArrayList<Substrate> substrates = new ArrayList<>();
 
-    class SubstrateHolder extends RecyclerView.ViewHolder {
+    public class SubstrateHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView watering;
         private SwitchCompat selectSwitch;
         private RecyclerView rv_components;
+        private int substrate_id;
 
         SubstrateHolder(View itemView) {
             super(itemView);
@@ -31,6 +32,9 @@ public class RV_Adapter_substrates extends RecyclerView.Adapter<RV_Adapter_subst
             watering = itemView.findViewById(R.id.textView_watering);
             rv_components = itemView.findViewById(R.id.rv_components);
         }
+
+        public int getSubstrate_id(){ return substrate_id; }
+        public SwitchCompat getSelectSwitch(){ return selectSwitch; }
     }
 
     @NonNull
@@ -47,6 +51,7 @@ public class RV_Adapter_substrates extends RecyclerView.Adapter<RV_Adapter_subst
         holder.name.setText(currentSubstrate.getName());
         holder.watering.setText(String.valueOf(currentSubstrate.getWateringInDays()));
         holder.rv_components.setVisibility(View.GONE);
+        holder.substrate_id = currentSubstrate.getSubstrate_id();
     }
 
     @Override

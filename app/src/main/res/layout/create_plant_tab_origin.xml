@@ -27,7 +27,6 @@
         android:layout_height="48dp"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:inputType="text"
         android:textAlignment="center"
         android:textSize="24sp"
         android:contentDescription="@string/spinner_continent"
@@ -63,8 +62,8 @@
     <TextView
         android:id="@+id/textView_lighting"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -76,18 +75,30 @@
 
     <TextView
         android:id="@+id/textView_winter"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:ems="10"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:text="@string/winter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_highland" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_highland"
+        app:layout_constraintEnd_toStartOf="@id/spinner_winter"
+        app:layout_constraintWidth_percent="0.4"/>
+
+    <Spinner
+        android:id="@+id/spinner_winter"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/spinner_winter"
+        android:ems="10"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView_winter"
+        app:layout_constraintTop_toBottomOf="@+id/switch_highland"
+        app:layout_constraintWidth_percent="0.4" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_lighting"
