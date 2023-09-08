@@ -19,13 +19,17 @@ import java.util.List;
 public class RV_Adapter_lighting extends RecyclerView.Adapter<RV_Adapter_lighting.LightingHolder> {
     private ArrayList<Lighting> lightings = new ArrayList<>();
 
-    class LightingHolder extends RecyclerView.ViewHolder {
+    public class LightingHolder extends RecyclerView.ViewHolder {
         private SwitchCompat switchCompat;
+        private int lighting_id;
 
         LightingHolder(View itemView) {
             super(itemView);
             switchCompat = itemView.findViewById(R.id.column_lighting);
         }
+
+        public int getLighting_id(){ return lighting_id; }
+        public SwitchCompat getSelectSwitch(){ return switchCompat; }
     }
 
     @NonNull

@@ -11,18 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.mycarni_garden.MainActivity;
 import com.mycarni_garden.R;
-import com.mycarni_garden.data.model.Lighting;
 import com.mycarni_garden.ui.adapters.FS_Adapter_CreatePlant;
-import com.mycarni_garden.ui.main.MainFragment;
-import com.mycarni_garden.ui.viewmodels.LightingViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreatePlantFragment extends Fragment {
@@ -44,15 +39,11 @@ public class CreatePlantFragment extends Fragment {
         return rootView;
     }
 
-    private void saveFiles(){
-        
-    }
-
     private void initViews(View rootView) {
         viewPager = rootView.findViewById(R.id.viewPager_createPlantTabs);
         TabLayout tabLayout = rootView.findViewById(R.id.createPlantTabs);
 
-        FS_Adapter_CreatePlant fragmentAdapter = new FS_Adapter_CreatePlant(requireActivity());
+        FS_Adapter_CreatePlant fragmentAdapter = new FS_Adapter_CreatePlant(requireActivity(), this);
         viewPager.setAdapter(fragmentAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager,
@@ -85,5 +76,57 @@ public class CreatePlantFragment extends Fragment {
     private void goBack(){
         int currentPage = viewPager.getCurrentItem();
         if (currentPage > 0) viewPager.setCurrentItem(currentPage-1,true);
+    }
+
+    //----------------------------------------------------------
+
+    private String species_name;
+    private String family;
+    private String growth;
+    private String lifespan;
+    private String description;
+
+    private List<Integer> substrate_ids = new ArrayList<>();
+
+    private String continent;
+    private String area;
+    private boolean isHighlander;
+    private List<Integer> lighting_ids = new ArrayList<>();
+
+    void saveInfo(String species_name, String family, String growth, String lifespan, String description) {
+        this.species_name = species_name;
+        this.family = family;
+        this.growth = growth;
+        this.lifespan = lifespan;
+        this.description = description;
+    }
+
+    void saveSubstrate(List<Integer> substrate_ids){
+        this.substrate_ids = substrate_ids;
+    }
+
+    void saveOrigin(String continent, String area, boolean isHighlander, List<Integer> lighting_ids){
+        this.continent = continent;
+        this.area = area;
+        this.isHighlander = isHighlander;
+        this.lighting_ids = lighting_ids;
+    }
+    
+    void persistFile(){
+        boolean isComplete = true;
+        String[] toCheck = {species_name, growth, lifespan, description, area};
+        for (String item :
+                toCheck) {
+            if (item.trim().equals("")) {
+                isComplete = false;
+                break;
+            }
+        }
+        if (substrate_ids.size() == 0 || lighting_ids.size() == 0) isComplete = false;
+        if (!isComplete){
+            Toast.makeText(getContext(), "Please fill all elements!", Toast.LENGTH_SHORT).show();
+            //return;
+        }
+
     }
 }

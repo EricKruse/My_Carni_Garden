@@ -19,7 +19,7 @@ public class  column_create_ingredient {
     }
 
     public boolean isFilled() {
-        return !TextUtils.isEmpty(editTextMaterial.getText()) && !TextUtils.isEmpty(editTextParts.getText());
+        return !(TextUtils.isEmpty(editTextMaterial.getText()) && TextUtils.isEmpty(editTextParts.getText()));
     }
 
     public void setOnTextChangedListener(TextWatcher textWatcher) {
