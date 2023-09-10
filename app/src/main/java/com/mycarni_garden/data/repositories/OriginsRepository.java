@@ -41,7 +41,7 @@ public class OriginsRepository {
         return originsDao.getOriginIdByArea(area, isHighland);
     }
 
-    public LiveData<List<Origins>> getOriginsByListOfIds(List<Integer> origin_ids) { return originsDao.getOriginsByListOfIds(origin_ids); }
+    public LiveData<List<Origins>> getOriginsByListOfId(List<Integer> origin_ids) { return originsDao.getOriginsByListOfIds(origin_ids); }
 
     public LiveData<List<Origins>> getAllOrigins() {
         return allOriginss;

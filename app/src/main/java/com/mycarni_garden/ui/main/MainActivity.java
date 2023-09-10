@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        showCreatePlantFragment();
+        //showMainFragment();
     }
 
-    private void showCreatePlantFragment() {
+    public void showCreatePlantFragment() {
         Fragment createPlantFragment = new CreatePlantFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, createPlantFragment);

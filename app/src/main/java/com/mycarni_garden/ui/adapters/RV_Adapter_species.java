@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycarni_garden.R;
@@ -26,6 +27,7 @@ public class RV_Adapter_species extends RecyclerView.Adapter<RV_Adapter_species.
     public RV_Adapter_species() {}
 
     public class SpeciesHolder extends RecyclerView.ViewHolder {
+        private CardView cardView;
         private TextView species_name;
         private ImageView species_icon;
         private int species_id;
@@ -34,6 +36,7 @@ public class RV_Adapter_species extends RecyclerView.Adapter<RV_Adapter_species.
             super(itemView);
             species_name = itemView.findViewById(R.id.textView_speciesName);
             species_icon = itemView.findViewById(R.id.imageView_speciesIcon);
+            cardView = itemView.findViewById(R.id.cardView_species);
         }
 
         public int getSpecies_id(){ return species_id; }
@@ -51,6 +54,7 @@ public class RV_Adapter_species extends RecyclerView.Adapter<RV_Adapter_species.
     public void onBindViewHolder(@NonNull SpeciesHolder holder, int position) {
         Species currentSpecies = species.get(position);
         holder.species_name.setText(currentSpecies.getName());
+        holder.cardView.setOnClickListener(clickedView -> mainFragment.switchForwards(holder.species_id));
     }
 
     @Override
@@ -60,6 +64,11 @@ public class RV_Adapter_species extends RecyclerView.Adapter<RV_Adapter_species.
 
     public void setSpeciesList(List<Species> species) {
         this.species = (ArrayList<Species>) species;
+        notifyDataSetChanged();
+    }
+
+    public void clearSpeciesList(){
+        species.clear();
         notifyDataSetChanged();
     }
 }

@@ -35,5 +35,5 @@ public class OriginsViewModel extends AndroidViewModel {
 
     public LiveData<Integer> getOriginIdByArea (String area, boolean highlands) { return repository.getOriginIdByArea(area, highlands); }
 
-    public LiveData<List<Origins>> getOriginsByListOfIds(List<Integer> origin_ids) { return repository.getOriginsByListOfIds(origin_ids); }
+    public LiveData<List<Origins>> getOriginsByListOfIds(List<Integer> origin_ids) { return repository.getOriginsByListOfId(origin_ids); }
 }

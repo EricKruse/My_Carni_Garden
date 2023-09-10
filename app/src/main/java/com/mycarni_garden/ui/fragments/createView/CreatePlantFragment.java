@@ -26,6 +26,7 @@ import com.mycarni_garden.ui.viewmodels.OriginsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CreatePlantFragment extends Fragment {
 
@@ -151,6 +152,7 @@ public class CreatePlantFragment extends Fragment {
         LiveData<Integer> family_id = familiesViewModel.getFamilyIdByName(family);
 
         growth = Integer.parseInt(growth_text);
-        //Species newSpecies = new Species(species_name, growth, lifespan, family_id.getValue(), newOrigin_id.getValue(), description);
+        Species newSpecies = new Species(species_name, growth, lifespan, family_id.getValue(), newOrigin_id.getValue(), description);
+        requireActivity().finish();
     }
 }

@@ -30,8 +30,11 @@ public interface SpeciesDAO {
     @Query("SELECT * FROM species WHERE species_id = :species_id")
     LiveData<Species> getSpeciesById(int species_id);
 
-    @Query("SELECT origin_id FROM species WHERE family_id = :family_id")
-    LiveData<List<Integer>> getOriginIdsOfFamilyIds(int family_id);
+    @Query("SELECT DISTINCT origin_id FROM species WHERE family_id = :family_id")
+    LiveData<List<Integer>> getOriginIdsOfFamilyId(int family_id);
+
+    @Query("SELECT * FROM species WHERE family_id = :family_id AND origin_id = :origin_id")
+    LiveData<List<Species>> getSpeciesOfFamilyFromOrigin(int family_id, int origin_id);
 
     @Transaction
     @Query("SELECT * FROM species WHERE species_id = :species_id")

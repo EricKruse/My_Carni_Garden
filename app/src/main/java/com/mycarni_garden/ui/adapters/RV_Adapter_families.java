@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycarni_garden.R;
@@ -27,6 +28,7 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
     public RV_Adapter_families() {}
 
     public class FamiliesHolder extends RecyclerView.ViewHolder {
+        private CardView cardView;
         private TextView family_name;
         private TextView family_engName;
         private ImageView family_icon;
@@ -37,6 +39,7 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
             family_name = itemView.findViewById(R.id.textView_familyName);
             family_engName = itemView.findViewById(R.id.textView_familyEngName);
             family_icon = itemView.findViewById(R.id.imageView_familyIcon);
+            cardView = itemView.findViewById(R.id.cardView_family);
         }
 
         public int getFamily_id(){ return family_id; }
@@ -55,6 +58,7 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
         Families currentFamily = families.get(position);
         holder.family_name.setText(currentFamily.getName());
         holder.family_engName.setText(currentFamily.getEng_name());
+        holder.cardView.setOnClickListener(clickedView -> mainFragment.switchForwards(holder.family_id));
     }
 
     @Override
@@ -64,6 +68,11 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
 
     public void setFamiliesList(List<Families> families) {
         this.families = (ArrayList<Families>) families;
+        notifyDataSetChanged();
+    }
+
+    public void clearFamiliesList(){
+        families.clear();
         notifyDataSetChanged();
     }
 }

@@ -29,7 +29,9 @@ public class SpeciesViewModel extends AndroidViewModel {
         repository.update(species);
     }
 
-    public LiveData<List<Integer>> getOriginIdsOfFamilyIds(int family_id) { return repository.getOriginIdsOfFamilyIds(family_id);}
+    public LiveData<List<Integer>> getOriginIdsOfFamilyId(int family_id) { return repository.getOriginIdsOfFamilyId(family_id);}
+
+    public LiveData<List<Species>> getSpeciesOfFamilyFromOrigin(int family_id, int origin_id) { return repository.getSpeciesOfFamilyFromOrigin(family_id, origin_id); }
 
     public LiveData<List<Species>> getAllSpecies() {
         return allSpecies;

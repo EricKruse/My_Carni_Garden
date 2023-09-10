@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycarni_garden.R;
@@ -26,6 +27,7 @@ public class RV_Adapter_origins extends RecyclerView.Adapter<RV_Adapter_origins.
     public RV_Adapter_origins() {}
 
     public class OriginsHolder extends RecyclerView.ViewHolder {
+        private CardView cardView;
         private TextView area;
         private TextView continent;
         private TextView highlands;
@@ -36,6 +38,7 @@ public class RV_Adapter_origins extends RecyclerView.Adapter<RV_Adapter_origins.
             area = itemView.findViewById(R.id.textView_originArea);
             continent = itemView.findViewById(R.id.textView_continent);
             highlands = itemView.findViewById(R.id.textView_highlands);
+            cardView = itemView.findViewById(R.id.cardView_origin);
         }
 
         public int getOrigin_id(){ return origin_id; }
@@ -57,6 +60,7 @@ public class RV_Adapter_origins extends RecyclerView.Adapter<RV_Adapter_origins.
         String highlandText = "Highlands";
         if (!currentOrigins.isHighland()) highlandText = "Lowlands";
         holder.highlands.setText(highlandText);
+        holder.cardView.setOnClickListener(clickedView -> mainFragment.switchForwards(holder.origin_id));
     }
 
     @Override
@@ -66,6 +70,11 @@ public class RV_Adapter_origins extends RecyclerView.Adapter<RV_Adapter_origins.
 
     public void setOriginsList(List<Origins> origins) {
         this.origins = (ArrayList<Origins>) origins;
+        notifyDataSetChanged();
+    }
+
+    public void clearOriginsList(){
+        origins.clear();
         notifyDataSetChanged();
     }
 }
