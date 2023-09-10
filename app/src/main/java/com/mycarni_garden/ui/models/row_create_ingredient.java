@@ -2,18 +2,16 @@ package com.mycarni_garden.ui.models;
 
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.mycarni_garden.R;
 
-public class  column_create_ingredient {
+public class row_create_ingredient {
     private EditText editTextMaterial;
     private EditText editTextParts;
 
-    public column_create_ingredient(View columnView) {
+    public row_create_ingredient(View columnView) {
         editTextMaterial = columnView.findViewById(R.id.editText_material);
         editTextParts = columnView.findViewById(R.id.editText_parts);
     }

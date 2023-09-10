@@ -19,6 +19,7 @@
             android:layout_marginRight="20dip"
             android:scaleType="centerCrop"
             android:src="@drawable/arrow_left_bold"
+            android:background="@android:color/transparent"
             />
 
         <TextView

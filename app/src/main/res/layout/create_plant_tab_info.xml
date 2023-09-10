@@ -104,7 +104,8 @@
         android:onClick="onGoToSubstrate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/arrow_right_bold_circle"/>
+        app:srcCompat="@drawable/arrow_right_bold_circle"
+        android:background="@android:color/transparent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

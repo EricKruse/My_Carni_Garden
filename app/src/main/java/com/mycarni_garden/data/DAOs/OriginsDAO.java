@@ -40,6 +40,9 @@ public interface OriginsDAO {
     @Query("SELECT origin_id FROM origins WHERE continent = :continent AND area = :area AND isHighland = :isHighland")
     LiveData<Integer> getOriginWithThree(String continent, String area, boolean isHighland);
 
+    @Query("SELECT * FROM origins WHERE origin_id IN (:origin_ids)")
+    LiveData<List<Origins>> getOriginsByListOfIds(List<Integer> origin_ids);
+
     @Transaction
     @Query("SELECT * FROM origins WHERE origin_id = :origin_id")
     LiveData<OriginWithLighting> getOriginWithLightingById(long origin_id);
