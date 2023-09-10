@@ -41,7 +41,7 @@ public class RV_Adapter_substrates extends RecyclerView.Adapter<RV_Adapter_subst
     @Override
     public RV_Adapter_substrates.SubstrateHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.detail_column_substrate, parent, false);
+                .inflate(R.layout.detail_row_substrate, parent, false);
         return new SubstrateHolder(itemView);
     }
 

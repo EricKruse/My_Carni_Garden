@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -20,7 +19,7 @@ import com.mycarni_garden.R;
 import com.mycarni_garden.data.model.Substrate;
 import com.mycarni_garden.ui.adapters.RV_Adapter_addIngredient;
 import com.mycarni_garden.ui.adapters.RV_Adapter_substrates;
-import com.mycarni_garden.ui.models.column_create_ingredient;
+import com.mycarni_garden.ui.models.row_create_ingredient;
 import com.mycarni_garden.ui.viewmodels.SubstrateViewModel;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class TabFrag_Substrate extends Fragment{
     private SubstrateViewModel substrateViewModel;
     private RV_Adapter_substrates rv_adapter_substrates;
 
-    private List<column_create_ingredient> Ingredients = new ArrayList<>();
+    private List<row_create_ingredient> Ingredients = new ArrayList<>();
 
     public TabFrag_Substrate(CreatePlantFragment parentClass) {
         this.parentClass = parentClass;

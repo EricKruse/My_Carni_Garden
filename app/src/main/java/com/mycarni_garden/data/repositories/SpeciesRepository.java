@@ -41,6 +41,10 @@ public class SpeciesRepository {
         return allSpeciess;
     }
 
+    public LiveData<List<Integer>> getOriginIdsOfFamilyId(int family_id){ return speciesDao.getOriginIdsOfFamilyId(family_id); }
+
+    public LiveData<List<Species>> getSpeciesOfFamilyFromOrigin(int family_id, int origin_id) { return speciesDao.getSpeciesOfFamilyFromOrigin(family_id, origin_id); }
+
     //-------------- Async tasks ---------------------------
 
     private static class InsertSpecies_AT extends AsyncTask<Species, Void, Void> {

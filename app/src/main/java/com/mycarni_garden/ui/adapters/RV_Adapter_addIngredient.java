@@ -10,23 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mycarni_garden.R;
-import com.mycarni_garden.ui.models.column_create_ingredient;
+import com.mycarni_garden.ui.models.row_create_ingredient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_addIngredient.ViewHolder> {
 
-    private List<column_create_ingredient> Ingredients;
+    private List<row_create_ingredient> Ingredients;
     private RecyclerView rv_addIngredients;
     private View view;
     private TextWatcher textWatcher;
 
-    public RV_Adapter_addIngredient(RecyclerView rv_addIngredients, List<column_create_ingredient> Ingredients) {
+    public RV_Adapter_addIngredient(RecyclerView rv_addIngredients, List<row_create_ingredient> Ingredients) {
         this.Ingredients = Ingredients;
         this.rv_addIngredients = rv_addIngredients;
         ViewGroup parent = (ViewGroup) rv_addIngredients.getParent();
-        column_create_ingredient initial_column = addColumn(parent);
+        row_create_ingredient initial_column = addRow(parent);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -39,7 +38,7 @@ public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_ad
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        column_create_ingredient column = addColumn(parent);
+        row_create_ingredient column = addRow(parent);
 
         textWatcher = new TextWatcher() {
             @Override
@@ -56,7 +55,7 @@ public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_ad
                 int position = Ingredients.lastIndexOf(column);
                 if (Ingredients.size() < 5 && column.isFilled() && position == Ingredients.size() - 1) {
                     column.removeOnTextChangedListener(textWatcher);
-                    column_create_ingredient newColumn = addColumn(parent);
+                    row_create_ingredient newRow = addRow(parent);
                 }
             }
         };
@@ -68,7 +67,7 @@ public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_ad
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        column_create_ingredient ingredient = Ingredients.get(position);
+        row_create_ingredient ingredient = Ingredients.get(position);
         setTextWatcher(Ingredients.get((Ingredients.size())-1));
     }
 
@@ -77,15 +76,15 @@ public class RV_Adapter_addIngredient extends RecyclerView.Adapter<RV_Adapter_ad
         return Ingredients.size();
     }
 
-    private column_create_ingredient addColumn(ViewGroup parent){
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_column_substrate_create_ingredient, parent, false);
-        column_create_ingredient column = new column_create_ingredient(view);
+    private row_create_ingredient addRow(ViewGroup parent){
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detail_row_substrate_create_ingredient, parent, false);
+        row_create_ingredient column = new row_create_ingredient(view);
         Ingredients.add(column);
         //notifyItemInserted(Ingredients.size()-1);
         return column;
     }
 
-    public void setTextWatcher(column_create_ingredient column) {
+    public void setTextWatcher(row_create_ingredient column) {
         column.setOnTextChangedListener(textWatcher);
     }
 }

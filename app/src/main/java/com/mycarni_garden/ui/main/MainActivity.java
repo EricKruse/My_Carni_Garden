@@ -1,4 +1,4 @@
-package com.mycarni_garden;
+package com.mycarni_garden.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.widget.EditText;
 
+import com.mycarni_garden.R;
 import com.mycarni_garden.data.model.Lighting;
 import com.mycarni_garden.ui.fragments.createView.CreatePlantFragment;
 import com.mycarni_garden.ui.fragments.createView.TabFrag_Info;
@@ -23,10 +24,10 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        showCreatePlantFragment();
+        //showMainFragment();
     }
 
-    private void showCreatePlantFragment() {
+    public void showCreatePlantFragment() {
         Fragment createPlantFragment = new CreatePlantFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, createPlantFragment);
