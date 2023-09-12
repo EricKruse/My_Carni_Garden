@@ -108,13 +108,11 @@ public class MainFragment extends Fragment {
 
     private void getAndPrepareOriginsList (){
         if (current_family_id > -1) {
-            //List<Integer> origin_ids = speciesViewModel.getOriginIdsOfFamilyId(current_family_id).getValue();
             LiveData<List<Origins>> fitting_origins = originsViewModel.getOriginsByFamilyIdInSpecies(current_family_id);
             if (fitting_origins == null) {
                 rv_mainFragment.setVisibility(View.GONE);
             } else {
-                //rv_mainFragment.setVisibility(View.VISIBLE);
-                //originsViewModel.getOriginsByListOfIds(origin_ids)
+                rv_mainFragment.setVisibility(View.VISIBLE);
                 fitting_origins.observe(getViewLifecycleOwner(), new Observer<List<Origins>>() {
                     @Override
                     public void onChanged(List<Origins> origins) {

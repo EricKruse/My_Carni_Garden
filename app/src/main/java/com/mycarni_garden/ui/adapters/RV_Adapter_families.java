@@ -62,7 +62,7 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
         mainViewModel.addToFamiliesInfoList(currentFamily.getFamily_id(), currentFamily.getName());
         holder.family_name.setText(currentFamily.getName());
         holder.family_engName.setText(currentFamily.getEng_name());
-        holder.cardView.setOnClickListener(clickedView -> mainFragment.switchForwards(holder.family_id));
+        holder.cardView.setOnClickListener(clickedView -> mainFragment.switchForwards(currentFamily.getFamily_id()));
     }
 
     @Override
