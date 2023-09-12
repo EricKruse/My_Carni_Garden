@@ -33,7 +33,13 @@ public class OriginsViewModel extends AndroidViewModel {
         return allOrigins;
     }
 
-    public LiveData<Integer> getOriginIdByArea (String area, boolean highlands) { return repository.getOriginIdByArea(area, highlands); }
+    public int getOriginIdByArea (String area, boolean highlands) {
+        return repository.getOriginIdByArea(area, highlands);
+    }
+
+    //public LiveData<Origins> getOriginByArea(String area, boolean highlands) { return repository.getOriginByArea(area, highlands); }
 
     public LiveData<List<Origins>> getOriginsByListOfIds(List<Integer> origin_ids) { return repository.getOriginsByListOfId(origin_ids); }
+
+    public LiveData<List<Origins>> getOriginsByFamilyIdInSpecies(int family_id) { return repository.getOriginsByFamilyIdInSpecies(family_id); }
 }

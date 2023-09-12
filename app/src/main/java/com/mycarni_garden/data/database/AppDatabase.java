@@ -250,13 +250,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
             // Combine Origins and Lighting
 
-            int borneoUp_id = originsDao.getOriginIdByArea(borneo, true).getValue();
-            int borneoDown_id = originsDao.getOriginIdByArea(borneo, false).getValue();
-            int sulawesiUp_id = originsDao.getOriginIdByArea(sulawesi, true).getValue();
-            int sulawesiDown_id = originsDao.getOriginIdByArea(sulawesi, false).getValue();
-            int eastCoastUSA_id = originsDao.getOriginIdByArea(eastCoastUSA, false).getValue();
-            int nwUSA_id = originsDao.getOriginIdByArea(nwUSA, false).getValue();
-            int capensis_id = originsDao.getOriginIdByArea(capensis, false).getValue();
+            int borneoUp_id = originsDao.getOriginIdByArea(borneo, true); // .getValue();
+            int borneoDown_id = originsDao.getOriginIdByArea(borneo, false); // .getValue();
+            int sulawesiUp_id = originsDao.getOriginIdByArea(sulawesi, true); // .getValue();
+            int sulawesiDown_id = originsDao.getOriginIdByArea(sulawesi, false); // .getValue();
+            int eastCoastUSA_id = originsDao.getOriginIdByArea(eastCoastUSA, false); // .getValue();
+            int nwUSA_id = originsDao.getOriginIdByArea(nwUSA, false); // .getValue();
+            int capensis_id = originsDao.getOriginIdByArea(capensis, false); // .getValue();
             int sunny_id = lightingDao.getLightingIdByName(sunny);
             int bright_id = lightingDao.getLightingIdByName(bright);
             int halfShade_id = lightingDao.getLightingIdByName(hShade);

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mycarni_garden.R;
 import com.mycarni_garden.data.model.Families;
 import com.mycarni_garden.ui.main.MainFragment;
+import com.mycarni_garden.ui.main.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,11 @@ import java.util.List;
 public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_families.FamiliesHolder> {
     private ArrayList<Families> families = new ArrayList<>();
     private MainFragment mainFragment;
+    private MainViewModel mainViewModel;
 
-    public RV_Adapter_families(MainFragment mainFragment) {
+    public RV_Adapter_families(MainFragment mainFragment, MainViewModel mainViewModel) {
         this.mainFragment = mainFragment;
+        this.mainViewModel = mainViewModel;
     }
     public RV_Adapter_families() {}
 
@@ -56,6 +59,7 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
     @Override
     public void onBindViewHolder(@NonNull FamiliesHolder holder, int position) {
         Families currentFamily = families.get(position);
+        mainViewModel.addToFamiliesInfoList(currentFamily.getFamily_id(), currentFamily.getName());
         holder.family_name.setText(currentFamily.getName());
         holder.family_engName.setText(currentFamily.getEng_name());
         holder.cardView.setOnClickListener(clickedView -> mainFragment.switchForwards(holder.family_id));
@@ -68,11 +72,6 @@ public class RV_Adapter_families extends RecyclerView.Adapter<RV_Adapter_familie
 
     public void setFamiliesList(List<Families> families) {
         this.families = (ArrayList<Families>) families;
-        notifyDataSetChanged();
-    }
-
-    public void clearFamiliesList(){
-        families.clear();
         notifyDataSetChanged();
     }
 }

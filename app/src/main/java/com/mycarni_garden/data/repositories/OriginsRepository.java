@@ -10,6 +10,8 @@ import com.mycarni_garden.data.database.AppDatabase;
 import com.mycarni_garden.data.model.Origins;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class OriginsRepository {
     private OriginsDAO originsDao;
@@ -37,15 +39,27 @@ public class OriginsRepository {
         return originsDao.getOriginById(origin_id);
     }
 
-    public LiveData<Integer> getOriginIdByArea(String area, boolean isHighland) {
-        return originsDao.getOriginIdByArea(area, isHighland);
-    }
+    //public LiveData<Integer> getOriginIdByArea(String area, boolean isHighland) { return originsDao.getOriginIdByArea(area, isHighland);}
 
     public LiveData<List<Origins>> getOriginsByListOfId(List<Integer> origin_ids) { return originsDao.getOriginsByListOfIds(origin_ids); }
 
     public LiveData<List<Origins>> getAllOrigins() {
         return allOriginss;
     }
+
+    // public LiveData<Origins> getOriginByArea(String area, boolean isHighland) { return originsDao.getOriginByArea(area, isHighland); }
+
+    public int getOriginIdByArea(String area, boolean isHighland) {
+        AtomicInteger origin_id_atomic = new AtomicInteger();
+        int origin_id;
+        Executors.newSingleThreadExecutor().execute(() -> {
+            origin_id_atomic.set(originsDao.getOriginIdByArea(area, isHighland));
+        });
+        origin_id = origin_id_atomic.intValue();
+        return origin_id;
+    }
+
+    public LiveData<List<Origins>> getOriginsByFamilyIdInSpecies(int family_id) { return originsDao.getOriginsByFamilyIdInSpecies(family_id); }
 
     //-------------- Async tasks ---------------------------
 

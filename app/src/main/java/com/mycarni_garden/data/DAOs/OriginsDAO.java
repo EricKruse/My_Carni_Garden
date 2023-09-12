@@ -35,13 +35,13 @@ public interface OriginsDAO {
     LiveData<Origins> getOriginById(int origin_id);
 
     @Query("SELECT origin_id FROM origins WHERE area = :area AND isHighland = :isHighland")
-    LiveData<Integer> getOriginIdByArea(String area, boolean isHighland);
-
-    @Query("SELECT origin_id FROM origins WHERE continent = :continent AND area = :area AND isHighland = :isHighland")
-    LiveData<Integer> getOriginWithThree(String continent, String area, boolean isHighland);
+    int getOriginIdByArea(String area, boolean isHighland);
 
     @Query("SELECT * FROM origins WHERE origin_id IN (:origin_ids)")
     LiveData<List<Origins>> getOriginsByListOfIds(List<Integer> origin_ids);
+
+    @Query("SELECT o.* FROM origins AS o JOIN species AS s ON o.origin_id = s.origin_id WHERE s.family_id = :family_id")
+    LiveData<List<Origins>> getOriginsByFamilyIdInSpecies(int family_id);
 
     @Transaction
     @Query("SELECT * FROM origins WHERE origin_id = :origin_id")

@@ -58,6 +58,8 @@ public class MainFragment extends Fragment {
         return new MainFragment();
     }
 
+    //-------------------------------------------------------
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +76,12 @@ public class MainFragment extends Fragment {
 
         btn_createNew = rootView.findViewById(R.id.btn_createNew);
         btn_createNew.setVisibility(View.GONE);
-        btn_createNew.setOnClickListener(clickedView -> mainActivity.showCreatePlantFragment());
+        btn_createNew.setOnClickListener(clickedView -> mainActivity.showCreatePlantFragment(mViewModel));
 
         rv_mainFragment = rootView.findViewById(R.id.rv_mainFragment);
         rv_mainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        rv_adapter_families = new RV_Adapter_families(this);
+        rv_adapter_families = new RV_Adapter_families(this, mViewModel);
         rv_adapter_origins = new RV_Adapter_origins(this);
         rv_adapter_species = new RV_Adapter_species(this);
 
@@ -106,13 +108,14 @@ public class MainFragment extends Fragment {
 
     private void getAndPrepareOriginsList (){
         if (current_family_id > -1) {
-            List<Integer> origin_ids = speciesViewModel.getOriginIdsOfFamilyId(current_family_id).getValue();
-            System.out.println("Origins of selected family: "+origin_ids);
-            if (origin_ids == null) {
+            //List<Integer> origin_ids = speciesViewModel.getOriginIdsOfFamilyId(current_family_id).getValue();
+            LiveData<List<Origins>> fitting_origins = originsViewModel.getOriginsByFamilyIdInSpecies(current_family_id);
+            if (fitting_origins == null) {
                 rv_mainFragment.setVisibility(View.GONE);
             } else {
-                rv_mainFragment.setVisibility(View.VISIBLE);
-                originsViewModel.getOriginsByListOfIds(origin_ids).observe(getViewLifecycleOwner(), new Observer<List<Origins>>() {
+                //rv_mainFragment.setVisibility(View.VISIBLE);
+                //originsViewModel.getOriginsByListOfIds(origin_ids)
+                fitting_origins.observe(getViewLifecycleOwner(), new Observer<List<Origins>>() {
                     @Override
                     public void onChanged(List<Origins> origins) {
                         rv_adapter_origins.setOriginsList(origins);
@@ -151,8 +154,6 @@ public class MainFragment extends Fragment {
             rv_mainFragment.setAdapter(rv_adapter_families);
             rv_adapter_origins.clearOriginsList();
             getAndPrepareFamiliesList();
-        } else {
-            current_species_id = -1;
         }
     }
 
@@ -161,23 +162,12 @@ public class MainFragment extends Fragment {
             System.out.println("Go forwards to origins");
             current_family_id = new_current_id;
             rv_mainFragment.setAdapter(rv_adapter_origins);
-            rv_adapter_families.clearFamiliesList();
             getAndPrepareOriginsList();
         } else if (current_origin_id == -1) {
             current_origin_id = new_current_id;
             rv_mainFragment.setAdapter(rv_adapter_species);
             rv_adapter_origins.clearOriginsList();
             getAndPrepareSpeciesList();
-        } else {
-            current_species_id = new_current_id;
         }
-    }
-
-    public int getCurrent_family_id() {
-        return current_family_id;
-    }
-
-    public int getCurrent_origin_id() {
-        return current_origin_id;
     }
 }

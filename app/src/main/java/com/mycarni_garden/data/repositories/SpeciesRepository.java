@@ -41,7 +41,12 @@ public class SpeciesRepository {
         return allSpeciess;
     }
 
-    public LiveData<List<Integer>> getOriginIdsOfFamilyId(int family_id){ return speciesDao.getOriginIdsOfFamilyId(family_id); }
+    /* public LiveData<List<Integer>> getOriginIdsOfFamilyId(int family_id){
+        return speciesDao.getOriginIdsOfFamilyId(family_id);
+    }*/
+    public void getOriginIdsOfFamilyIdAsync(int familyId, OriginIdsCallback callback) {
+        new GetOriginIdsAsyncTask(speciesDao, callback).execute(familyId);
+    }
 
     public LiveData<List<Species>> getSpeciesOfFamilyFromOrigin(int family_id, int origin_id) { return speciesDao.getSpeciesOfFamilyFromOrigin(family_id, origin_id); }
 
@@ -86,6 +91,32 @@ public class SpeciesRepository {
         protected Void doInBackground(Species... species) {
             speciesDao.Delete(species[0]);
             return null;
+        }
+    }
+
+    public interface OriginIdsCallback {
+        void onOriginIdsLoaded(List<Integer> originIds);
+    }
+
+    private static class GetOriginIdsAsyncTask extends AsyncTask<Integer, Void, List<Integer>> {
+        private SpeciesDAO speciesDao;
+        private OriginIdsCallback callback;
+
+        private GetOriginIdsAsyncTask(SpeciesDAO speciesDao, OriginIdsCallback callback) {
+            this.speciesDao = speciesDao;
+            this.callback = callback;
+        }
+
+        @Override
+        protected List<Integer> doInBackground(Integer... params) {
+            int familyId = params[0];
+            return speciesDao.getOriginIdsOfFamilyId(familyId);
+        }
+
+        @Override
+        protected void onPostExecute(List<Integer> originIds) {
+            super.onPostExecute(originIds);
+            callback.onOriginIdsLoaded(originIds);
         }
     }
 }

@@ -33,5 +33,7 @@ public class FamiliesViewModel extends AndroidViewModel {
         return allFamilies;
     }
 
-    public LiveData<Integer> getFamilyIdByName(String name) { return repository.getFamilyIdByName(name); }
+    public LiveData<Integer> getFamilyIdByName(String name) {
+        return repository.getFamilyIdByName(name);
+    }
 }

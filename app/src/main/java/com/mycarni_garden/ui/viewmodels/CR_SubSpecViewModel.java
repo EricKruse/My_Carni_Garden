@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import com.mycarni_garden.data.model.SubstrateSpeciesCrossRef;
 import com.mycarni_garden.data.repositories.CR_SubSpecRepository;
-import com.mycarni_garden.data.repositories.FamiliesRepository;
 
 import java.util.List;
 
@@ -27,7 +26,10 @@ public class CR_SubSpecViewModel extends AndroidViewModel {
 
     public void insertList(LiveData<List<SubstrateSpeciesCrossRef>> cr_list) { repository.insertList(cr_list); }
 
-    /*public void update(Families cr_subSpec) {
-        repository.update(cr_subSpec);
-    }*/
+    public void insertPossibleSubstrates(List<Integer> substrate_ids, int species_id) {
+        for (int i = 0; i < substrate_ids.size(); i++) {
+            SubstrateSpeciesCrossRef newCrossRef = new SubstrateSpeciesCrossRef(substrate_ids.get(i), species_id);
+            repository.insert(newCrossRef);
+        }
+    }
 }

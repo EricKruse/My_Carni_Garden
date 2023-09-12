@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity  {
         //showMainFragment();
     }
 
-    public void showCreatePlantFragment() {
-        Fragment createPlantFragment = new CreatePlantFragment();
+    public void showCreatePlantFragment(MainViewModel mainViewModel) {
+        Fragment createPlantFragment = new CreatePlantFragment(mainViewModel);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, createPlantFragment);
         transaction.addToBackStack(null);
