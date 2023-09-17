@@ -10,6 +10,7 @@ import com.mycarni_garden.data.database.AppDatabase;
 import com.mycarni_garden.data.model.Origins;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,6 +27,10 @@ public class OriginsRepository {
 
     public void insert(Origins Origins) {
         new InsertOrigins_AT(originsDao).execute(Origins);
+    }
+
+    public int insertAndGetId(Origins Origins) throws ExecutionException, InterruptedException {
+        return new InsertOriginsAndGetId_AT(originsDao).execute(Origins).get().intValue();
     }
 
     public void update(Origins Origins) {
@@ -74,6 +79,19 @@ public class OriginsRepository {
         protected Void doInBackground(Origins... origins) {
             originsDao.Insert(origins[0]);
             return null;
+        }
+    }
+
+    private static class InsertOriginsAndGetId_AT extends AsyncTask<Origins, Void, Integer> {
+        private OriginsDAO originsDao;
+
+        private InsertOriginsAndGetId_AT (OriginsDAO originsDao){
+            this.originsDao = originsDao;
+        }
+
+        @Override
+        protected Integer doInBackground(Origins... origins) {
+            return (int) originsDao.insertAndGetId(origins[0]);
         }
     }
 

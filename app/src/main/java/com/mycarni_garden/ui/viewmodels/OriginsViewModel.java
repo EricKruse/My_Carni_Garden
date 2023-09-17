@@ -10,6 +10,7 @@ import com.mycarni_garden.data.model.Origins;
 import com.mycarni_garden.data.repositories.OriginsRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class OriginsViewModel extends AndroidViewModel {
     private OriginsRepository repository;
@@ -23,6 +24,17 @@ public class OriginsViewModel extends AndroidViewModel {
 
     public void insert(Origins origin) {
         repository.insert(origin);
+    }
+
+    public int insertAndGetId(Origins origin) {
+        try {
+            return repository.insertAndGetId(origin);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     public void update(Origins origin) {

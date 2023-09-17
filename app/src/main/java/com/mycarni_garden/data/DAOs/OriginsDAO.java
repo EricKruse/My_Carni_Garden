@@ -19,6 +19,9 @@ public interface OriginsDAO {
     @Insert
     void Insert(Origins origins);
 
+    @Insert
+    long insertAndGetId(Origins origins);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertList(List<Origins> origins);
 
@@ -42,8 +45,4 @@ public interface OriginsDAO {
 
     @Query("SELECT o.* FROM origins AS o JOIN species AS s ON o.origin_id = s.origin_id WHERE s.family_id = :family_id")
     LiveData<List<Origins>> getOriginsByFamilyIdInSpecies(int family_id);
-
-    @Transaction
-    @Query("SELECT * FROM origins WHERE origin_id = :origin_id")
-    LiveData<OriginWithLighting> getOriginWithLightingById(long origin_id);
 }

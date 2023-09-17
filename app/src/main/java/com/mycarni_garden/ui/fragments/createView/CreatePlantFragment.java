@@ -169,19 +169,20 @@ public class CreatePlantFragment extends Fragment {
         //------- Start persisting
 
         Origins newOrigin = new Origins(continent, area, isHighlander, winterLvl);
-        originsViewModel.insert(newOrigin);
-        int newOrigin_id = originsViewModel.getOriginIdByArea(area, isHighlander);
+        int newOrigin_id = originsViewModel.insertAndGetId(newOrigin);
 
-        cr_lightOrigViewModel.insertLightingModesOfOrigin(lighting_ids, newOrigin_id);
+        if (newOrigin_id != -1) {
+            cr_lightOrigViewModel.insertLightingModesOfOrigin(lighting_ids, newOrigin_id);
 
-        int family_id = mainViewModel.findFamilyIdByName(family);
-        growth = Integer.parseInt(growth_text);
+            int family_id = mainViewModel.findFamilyIdByName(family);
+            growth = Integer.parseInt(growth_text);
 
-        Species newSpecies = new Species(species_name, growth, lifespan, family_id, newOrigin_id, description);
-        speciesViewModel.insert(newSpecies);
-        int newSpecies_id = newSpecies.getSpecies_id();
+            Species newSpecies = new Species(species_name, growth, lifespan, family_id, newOrigin_id, description);
+            speciesViewModel.insert(newSpecies);
+            int newSpecies_id = newSpecies.getSpecies_id();
 
-        cr_subSpecViewModel.insertPossibleSubstrates(substrate_ids, newSpecies_id);
-        requireActivity().finish();
+            cr_subSpecViewModel.insertPossibleSubstrates(substrate_ids, newSpecies_id);
+            requireActivity().finish();
+        }
     }
 }
