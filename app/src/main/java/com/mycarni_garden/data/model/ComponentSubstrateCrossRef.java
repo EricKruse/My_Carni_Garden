@@ -1,5 +1,6 @@
 package com.mycarni_garden.data.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -17,7 +18,10 @@ import androidx.room.Index;
         }
 )
 public class ComponentSubstrateCrossRef {
+    @ColumnInfo(name = "component_id")
     public long component_id;
+
+    @ColumnInfo(name = "substrate_id")
     public long substrate_id;
 
     public ComponentSubstrateCrossRef(long component_id, int substrate_id) {

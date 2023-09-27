@@ -15,5 +15,5 @@ public interface SubSpecCrossRefDAO {
     void insert(SubstrateSpeciesCrossRef crossRef);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertList(List<ComponentSubstrateCrossRef> crossRefs);
+    void insertList(List<SubstrateSpeciesCrossRef> crossRefs);
 }

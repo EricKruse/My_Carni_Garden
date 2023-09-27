@@ -42,6 +42,7 @@ public class RV_Adapter_lighting extends RecyclerView.Adapter<RV_Adapter_lightin
     public void onBindViewHolder(@NonNull LightingHolder holder, int position) {
         Lighting currentLighting = lightings.get(position);
         holder.switchCompat.setText(currentLighting.getName());
+        holder.lighting_id = currentLighting.getLighting_id();
     }
 
     @Override

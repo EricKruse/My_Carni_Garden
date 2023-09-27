@@ -1,6 +1,7 @@
 package com.mycarni_garden.data.model;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -18,7 +19,10 @@ import androidx.room.Index;
         }
 )
 public class LightingOriginCrossRef {
+    @ColumnInfo(name = "lighting_id")
     public int lighting_id;
+
+    @ColumnInfo(name = "origin_id")
     public int origin_id;
 
     public LightingOriginCrossRef(int lighting_id, int origin_id) {

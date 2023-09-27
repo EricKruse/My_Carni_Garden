@@ -11,6 +11,7 @@ import com.mycarni_garden.data.model.SubstrateSpeciesCrossRef;
 import com.mycarni_garden.data.repositories.CR_LightOrigRepository;
 import com.mycarni_garden.data.repositories.CR_SubSpecRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CR_LightOrigViewModel extends AndroidViewModel {
@@ -27,12 +28,4 @@ public class CR_LightOrigViewModel extends AndroidViewModel {
     }
 
     public void insertList(List<LightingOriginCrossRef> cr_list) { repository.insertList(cr_list); }
-
-    public void insertLightingModesOfOrigin(List<Integer> lighting_ids, int origin_id) {
-        for (int i = 0; i < lighting_ids.size(); i++) {
-            LightingOriginCrossRef newCrossRef = new LightingOriginCrossRef(lighting_ids.get(i), origin_id);
-            System.out.println("Trying to cross reference lighting ("+lighting_ids.get(i)+") and origin ("+origin_id+")");
-            repository.insert(newCrossRef);
-        }
-    }
 }
